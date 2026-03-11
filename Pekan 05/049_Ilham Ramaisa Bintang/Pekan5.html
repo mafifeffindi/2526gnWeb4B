@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pekan 05 - CSS Fundamentals</title>
+    <!-- Font Awesome untuk demo Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+
+        /* ============================================================
+           1. CSS COMMENTS
+           Komentar digunakan untuk memberi penjelasan pada kode CSS.
+           Komentar tidak akan ditampilkan di browser.
+           Format: /* teks komentar */
+        /* ============================================================ */
+
+        /* Ini adalah contoh CSS Comment — tidak berpengaruh pada tampilan */
+
+
+        /* ============================================================
+           2. CSS ERRORS
+           CSS tidak menampilkan error secara langsung, melainkan
+           mengabaikan property yang salah. Contoh di bawah menunjukkan
+           penulisan yang benar vs yang salah (diabaikan browser).
+           ============================================================ */
+
+        .error-example {
+            /* Benar */
+            color: red;
+
+            /* Salah — akan diabaikan browser (typo property) */
+            /* coloor: blue; */
+
+            /* Salah — nilai tidak valid */
+            /* font-size: besar; */
+        }
+
+
+        /* ============================================================
+           3. CSS COLORS
+           Warna pada CSS bisa ditulis dengan:
+           - Nama warna  : red, blue, green
+           - HEX         : #rrggbb
+           - RGB         : rgb(r, g, b)
+           - RGBA        : rgba(r, g, b, alpha)
+           - HSL         : hsl(h, s%, l%)
+           ============================================================ */
+
+        .colors-named   { background-color: tomato; color: #fff; }
+        .colors-hex     { background-color: #3a86ff; color: #fff; }
+        .colors-rgb     { background-color: rgb(100, 200, 100); color: #fff; }
+        .colors-rgba    { background-color: rgba(100, 100, 255, 0.6); color: #fff; }
+        .colors-hsl     { background-color: hsl(220, 80%, 60%); color: #fff; }
+
+
+        /* ============================================================
+           4. CSS BACKGROUNDS
+           Mengatur latar belakang elemen:
+           - background-color      : warna latar
+           - background-image      : gambar latar
+           - background-repeat     : pengulangan gambar
+           - background-position   : posisi gambar
+           - background-size       : ukuran gambar
+           - background-attachment : fixed / scroll
+           ============================================================ */
+
+        .backgrounds-example {
+            background-color: #e8f0fe;              /* warna latar belakang */
+            background-image: url('');              /* gambar latar (opsional) */
+            background-repeat: no-repeat;           /* tidak diulang */
+            background-position: center top;        /* posisi gambar */
+            background-size: cover;                 /* gambar menutupi seluruh elemen */
+            background-attachment: scroll;          /* gambar ikut scroll */
+        }
+
+
+        /* ============================================================
+           5. CSS BORDERS
+           Mengatur garis tepi elemen:
+           - border-width  : ketebalan garis
+           - border-style  : solid, dashed, dotted, double, dll.
+           - border-color  : warna garis
+           - border-radius : sudut melengkung
+           - Shorthand     : border: width style color
+           ============================================================ */
+
+        .border-solid  { border: 2px solid #3a86ff; }
+        .border-dashed { border: 2px dashed #ff6b6b; }
+        .border-dotted { border: 2px dotted #8338ec; }
+        .border-double { border: 4px double #fb5607; }
+        .border-radius { border: 2px solid #3a86ff; border-radius: 50px; }
+
+        /* Border per sisi */
+        .border-sides {
+            border-top: 3px solid #333;
+            border-right: 3px dashed #3a86ff;
+            border-bottom: 3px dotted #ff6b6b;
+            border-left: 3px double #8338ec;
+        }
+
+
+        /* ============================================================
+           6. CSS MARGINS
+           Margin adalah jarak DI LUAR elemen (ruang antar elemen).
+           - margin-top / right / bottom / left
+           - Shorthand: margin: top right bottom left
+           - Nilai auto digunakan untuk memusatkan elemen secara horizontal
+           ============================================================ */
+
+        .margins-example {
+            margin-top: 20px;       /* jarak atas */
+            margin-right: 15px;     /* jarak kanan */
+            margin-bottom: 20px;    /* jarak bawah */
+            margin-left: 15px;      /* jarak kiri */
+        }
+
+        .margin-auto {
+            /* Shorthand: atas-bawah 10px, kiri-kanan auto = tengah */
+            margin: 10px auto;
+            width: 60%;
+        }
+
+
+        /* ============================================================
+           7. CSS PADDING
+           Padding adalah jarak DI DALAM elemen (antara konten dan border).
+           - padding-top / right / bottom / left
+           - Shorthand: padding: top right bottom left
+           ============================================================ */
+
+        .padding-small { padding: 5px 10px; }    /* padding kecil */
+        .padding-large { padding: 20px 40px; }   /* padding besar */
+
+        .padding-sides {
+            padding-top: 16px;      /* jarak dalam atas */
+            padding-right: 24px;    /* jarak dalam kanan */
+            padding-bottom: 16px;   /* jarak dalam bawah */
+            padding-left: 24px;     /* jarak dalam kiri */
+        }
+
+
+        /* ============================================================
+           8. CSS HEIGHT / WIDTH
+           Mengatur ukuran elemen:
+           - width / height            : ukuran tetap (px, %, em, rem, dll.)
+           - max-width / min-width     : batas maksimum / minimum lebar
+           - max-height / min-height   : batas maksimum / minimum tinggi
+           ============================================================ */
+
+        .size-100x50  { width: 100px; height: 50px; }
+        .size-200x80  { width: 200px; height: 80px; }
+        .size-percent {
+            width: 80%;             /* lebar 80% dari parent */
+            max-width: 400px;       /* maksimal 400px */
+            min-height: 40px;       /* tinggi minimal 40px */
+        }
+
+
+        /* ============================================================
+           9. CSS BOX MODEL
+           Setiap elemen HTML terdiri dari 4 lapisan (dari dalam ke luar):
+           1. Content  : isi elemen
+           2. Padding  : jarak dalam
+           3. Border   : garis tepi
+           4. Margin   : jarak luar
+
+           box-sizing: border-box → width/height sudah termasuk padding & border
+           ============================================================ */
+
+        .box-model-example {
+            width: 300px;                   /* lebar area konten */
+            padding: 20px;                  /* padding di semua sisi */
+            border: 3px solid #3a86ff;      /* border */
+            margin: 10px auto;              /* margin, dan tengah horizontal */
+            box-sizing: border-box;         /* width 300px sudah include padding+border */
+            background-color: #dbeafe;
+            text-align: center;
+        }
+
+
+        /* ============================================================
+           10. CSS OUTLINE
+           Outline mirip border, TAPI:
+           - Tidak mempengaruhi ukuran/layout elemen
+           - Digambar DI LUAR border
+           - Sering digunakan untuk aksesibilitas (fokus)
+           - outline: width style color
+           ============================================================ */
+
+        .outline-example {
+            border: 2px solid #3a86ff;      /* border biasa */
+            outline: 3px dashed #ff6b6b;    /* outline di luar border */
+            outline-offset: 4px;            /* jarak outline dari border */
+        }
+
+        .outline-example:focus {
+            outline: 2px solid #ff6b6b;     /* outline saat elemen difokus */
+        }
+
+
+        /* ============================================================
+           11. CSS TEXT
+           Mengatur tampilan teks:
+           - color           : warna teks
+           - text-align      : rata kiri/kanan/tengah/justify
+           - text-decoration : garis bawah, coret, dll.
+           - text-transform  : huruf besar/kecil
+           - letter-spacing  : jarak antar huruf
+           - line-height     : jarak antar baris
+           - text-shadow     : bayangan teks
+           ============================================================ */
+
+        .text-left      { text-align: left; }
+        .text-center    { text-align: center; }
+        .text-right     { text-align: right; }
+        .text-underline { text-decoration: underline; }
+        .text-strike    { text-decoration: line-through; }
+        .text-upper     { text-transform: uppercase; letter-spacing: 3px; }
+        .text-shadow    { text-shadow: 2px 2px 5px rgba(58,134,255,0.5); font-size: 20px; font-weight: bold; }
+        .text-lineheight { line-height: 2.0; }
+
+
+        /* ============================================================
+           12. CSS FONTS
+           Mengatur jenis huruf:
+           - font-family   : jenis font
+           - font-size     : ukuran font
+           - font-weight   : ketebalan (normal, bold, 100-900)
+           - font-style    : normal / italic / oblique
+           - font-variant  : small-caps
+           - Shorthand     : font: style weight size/line-height family
+           ============================================================ */
+
+        .font-serif      { font-family: Georgia, serif; font-size: 18px; }
+        .font-monospace  { font-family: 'Courier New', monospace; font-size: 16px; }
+        .font-bold       { font-family: Arial, sans-serif; font-weight: bold; font-size: 16px; }
+        .font-italic     { font-family: Arial, sans-serif; font-style: italic; font-size: 16px; }
+        .font-smallcaps  { font-variant: small-caps; font-size: 16px; }
+
+        /* Shorthand font */
+        .font-shorthand  { font: italic bold 16px/1.5 Arial, sans-serif; }
+
+
+        /* ============================================================
+           13. CSS ICONS
+           Icon bisa digunakan melalui library eksternal seperti:
+           - Font Awesome  : <link> CDN, pakai class fa-*
+           - Bootstrap Icons
+           - Google Material Icons
+
+           Contoh styling icon dari Font Awesome:
+           ============================================================ */
+
+        .icon-style {
+            font-size: 28px;            /* ukuran icon */
+            color: #3a86ff;             /* warna icon */
+            margin: 0 8px;              /* jarak kiri-kanan */
+            vertical-align: middle;     /* sejajar teks */
+            cursor: pointer;            /* pointer saat hover */
+            transition: color 0.3s;     /* animasi perubahan warna */
+        }
+
+        .icon-style:hover {
+            color: #ff6b6b;             /* warna berubah saat hover */
+        }
+
+
+        /* ============================================================
+           14. CSS LINKS
+           Styling tautan (anchor <a>) berdasarkan state:
+           - a:link     : link yang belum dikunjungi
+           - a:visited  : link yang sudah dikunjungi
+           - a:hover    : saat kursor di atas link
+           - a:active   : saat link diklik
+           Urutan harus: link → visited → hover → active (LVHA)
+           ============================================================ */
+
+        a:link    { color: #3a86ff; text-decoration: none; }        /* belum dikunjungi */
+        a:visited { color: #8338ec; }                                /* sudah dikunjungi */
+        a:hover   { color: #ff6b6b; text-decoration: underline; }   /* saat hover */
+        a:active  { color: #fb5607; font-weight: bold; }            /* saat diklik */
+
+
+        /* ============================================================
+           15. CSS LISTS
+           Mengatur tampilan daftar (ul, ol, li):
+           - list-style-type     : jenis marker (disc, circle, square, decimal, dll.)
+           - list-style-image    : gambar sebagai marker
+           - list-style-position : inside / outside
+           - Shorthand           : list-style: type position image
+           ============================================================ */
+
+        ul.list-square {
+            list-style-type: square;        /* marker kotak */
+            list-style-position: inside;    /* marker di dalam konten */
+            padding-left: 10px;
+        }
+
+        ol.list-roman {
+            list-style-type: upper-roman;   /* penomoran angka romawi besar */
+            padding-left: 30px;
+        }
+
+        ul.list-square li,
+        ol.list-roman li {
+            margin-bottom: 6px;             /* jarak antar item */
+        }
+
+        .no-style-list {
+            list-style: none;               /* hilangkan marker */
+            padding: 0;
+            margin: 0;
+        }
+
+
+        /* ============================================================
+           16. CSS TABLES
+           Mengatur tampilan tabel (table, th, td, tr):
+           - border-collapse  : gabungkan border (collapse / separate)
+           - border-spacing   : jarak antar sel (jika separate)
+           - text-align       : rata teks dalam sel
+           - vertical-align   : posisi vertikal konten sel
+           - width / padding  : ukuran kolom dan jarak dalam sel
+           ============================================================ */
+
+        table.table-example {
+            width: 100%;                        /* tabel penuh */
+            border-collapse: collapse;          /* gabungkan border antar sel */
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
+        table.table-example th {
+            background-color: #3a86ff;          /* latar header biru */
+            color: #ffffff;                     /* teks putih */
+            padding: 12px 16px;                 /* jarak dalam sel header */
+            text-align: left;                   /* rata kiri */
+            font-weight: 600;
+        }
+
+        table.table-example td {
+            padding: 10px 16px;                 /* jarak dalam sel */
+            border: 1px solid #d1d5db;          /* garis tepi sel */
+            vertical-align: middle;             /* konten di tengah vertikal */
+        }
+
+        table.table-example tr:nth-child(even) {
+            background-color: #f0f4ff;          /* zebra striping — baris genap */
+        }
+
+        table.table-example tr:hover {
+            background-color: #dbeafe;          /* highlight baris saat hover */
+        }
+
+
+        /* ============================================================
+           STYLING HALAMAN DEMO
+           ============================================================ */
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f4ff;
+            color: #1a1a2e;
+            padding: 24px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3a86ff;
+            margin-bottom: 4px;
+            font-size: 26px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+
+        .section {
+            background: #fff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
+        .section h2 {
+            color: #3a86ff;
+            margin-bottom: 14px;
+            font-size: 16px;
+            border-bottom: 2px solid #e8f0fe;
+            padding-bottom: 8px;
+        }
+
+        .demo-box {
+            display: inline-block;
+            padding: 10px 18px;
+            border-radius: 6px;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .flex-wrap { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+    </style>
+</head>
+<body>
+
+    <h1>📘 Pekan 05 — CSS Fundamentals</h1>
+    <p class="subtitle">CSS Comments · Colors · Backgrounds · Borders · Margins · Padding · Height/Width · Box Model · Outline · Text · Fonts · Icons · Links · Lists · Tables</p>
+
+    <!-- 1. CSS COMMENTS -->
+    <div class="section">
+        <h2>1. CSS Comments</h2>
+        <p>Komentar CSS ditulis dengan <code>/* ... */</code> dan tidak ditampilkan di browser. Digunakan untuk dokumentasi kode.</p>
+        <div class="demo-box" style="background:#f0f4ff; font-family:monospace; font-size:13px; color:#3a86ff; width:100%;">
+            /* Ini adalah contoh CSS Comment */
+        </div>
+    </div>
+
+    <!-- 2. CSS ERRORS -->
+    <div class="section">
+        <h2>2. CSS Errors</h2>
+        <p>CSS tidak error secara visual — browser <strong>mengabaikan</strong> property yang salah ditulis.</p>
+        <div class="demo-box error-example" style="background:#fff3f3; border:1px solid #ffb3b3;">
+            Property yang benar tampil ✔ — yang salah diabaikan browser
+        </div>
+    </div>
+
+    <!-- 3. CSS COLORS -->
+    <div class="section">
+        <h2>3. CSS Colors</h2>
+        <div class="flex-wrap">
+            <div class="demo-box colors-named">Named: tomato</div>
+            <div class="demo-box colors-hex">HEX: #3a86ff</div>
+            <div class="demo-box colors-rgb">RGB</div>
+            <div class="demo-box colors-rgba">RGBA (transparan)</div>
+            <div class="demo-box colors-hsl">HSL</div>
+        </div>
+    </div>
+
+    <!-- 4. CSS BACKGROUNDS -->
+    <div class="section">
+        <h2>4. CSS Backgrounds</h2>
+        <div class="demo-box backgrounds-example" style="width:100%; padding:20px; border-radius:8px;">
+            background-color · background-repeat · background-position · background-size · background-attachment
+        </div>
+    </div>
+
+    <!-- 5. CSS BORDERS -->
+    <div class="section">
+        <h2>5. CSS Borders</h2>
+        <div class="flex-wrap">
+            <div class="demo-box border-solid">solid</div>
+            <div class="demo-box border-dashed">dashed</div>
+            <div class="demo-box border-dotted">dotted</div>
+            <div class="demo-box border-double">double</div>
+            <div class="demo-box border-radius">border-radius</div>
+            <div class="demo-box border-sides">per sisi berbeda</div>
+        </div>
+    </div>
+
+    <!-- 6. CSS MARGINS -->
+    <div class="section">
+        <h2>6. CSS Margins</h2>
+        <div style="background:#f0f4ff; padding:10px; border-radius:8px;">
+            <div class="demo-box margins-example" style="background:#3a86ff; color:#fff;">margin-top/right/bottom/left: 20px 15px</div>
+            <div class="demo-box margin-auto" style="background:#ff6b6b; color:#fff; text-align:center; display:block;">margin: auto (tengah)</div>
+        </div>
+    </div>
+
+    <!-- 7. CSS PADDING -->
+    <div class="section">
+        <h2>7. CSS Padding</h2>
+        <div class="flex-wrap">
+            <div class="demo-box padding-small" style="background:#3a86ff; color:#fff;">padding kecil (5px 10px)</div>
+            <div class="demo-box padding-large" style="background:#8338ec; color:#fff;">padding besar (20px 40px)</div>
+            <div class="demo-box padding-sides" style="background:#fb5607; color:#fff;">padding per sisi</div>
+        </div>
+    </div>
+
+    <!-- 8. CSS HEIGHT / WIDTH -->
+    <div class="section">
+        <h2>8. CSS Height / Width</h2>
+        <div class="flex-wrap">
+            <div class="size-100x50 demo-box" style="background:#3a86ff; color:#fff; display:flex; align-items:center; justify-content:center;">100×50px</div>
+            <div class="size-200x80 demo-box" style="background:#8338ec; color:#fff; display:flex; align-items:center; justify-content:center;">200×80px</div>
+            <div class="size-percent demo-box" style="background:#ff6b6b; color:#fff; display:flex; align-items:center; justify-content:center;">80% max-width:400px</div>
+        </div>
+    </div>
+
+    <!-- 9. CSS BOX MODEL -->
+    <div class="section">
+        <h2>9. CSS Box Model</h2>
+        <div class="box-model-example">
+            <strong>Content</strong><br>
+            <small style="color:#555;">← padding → border → margin (dari dalam ke luar)</small>
+        </div>
+    </div>
+
+    <!-- 10. CSS OUTLINE -->
+    <div class="section">
+        <h2>10. CSS Outline</h2>
+        <div class="demo-box outline-example" style="padding:14px 24px;">
+            Border biru + Outline merah dashed di luar
+        </div>
+        <p style="margin-top:10px; font-size:13px; color:#888;">Outline tidak mempengaruhi layout — digambar di luar border tanpa menggeser elemen lain.</p>
+    </div>
+
+    <!-- 11. CSS TEXT -->
+    <div class="section">
+        <h2>11. CSS Text</h2>
+        <p class="text-left">text-align: left</p>
+        <p class="text-center">text-align: center</p>
+        <p class="text-right">text-align: right</p>
+        <p class="text-underline">text-decoration: underline</p>
+        <p class="text-strike">text-decoration: line-through</p>
+        <p class="text-upper">text-transform uppercase + letter-spacing</p>
+        <p class="text-shadow">text-shadow effect</p>
+        <p class="text-lineheight" style="background:#f0f4ff; padding:8px; border-radius:6px;">line-height: 2.0 — jarak antar baris lebih lega<br>baris kedua terlihat lebih jauh dari baris pertama</p>
+    </div>
+
+    <!-- 12. CSS FONTS -->
+    <div class="section">
+        <h2>12. CSS Fonts</h2>
+        <p class="font-serif">Georgia — font-family serif</p>
+        <p class="font-monospace">Courier New — monospace</p>
+        <p class="font-bold">Arial — font-weight: bold</p>
+        <p class="font-italic">Arial — font-style: italic</p>
+        <p class="font-smallcaps">font-variant: small-caps</p>
+        <p class="font-shorthand" style="color:#3a86ff;">font shorthand: italic bold 16px/1.5 Arial</p>
+    </div>
+
+    <!-- 13. CSS ICONS -->
+    <div class="section">
+        <h2>13. CSS Icons</h2>
+        <p>Menggunakan Font Awesome via CDN (hover untuk efek):</p>
+        <div style="margin-top:10px;">
+            <i class="fa-solid fa-house icon-style"></i>
+            <i class="fa-solid fa-user icon-style"></i>
+            <i class="fa-solid fa-envelope icon-style"></i>
+            <i class="fa-solid fa-star icon-style" style="color:#fbbc04;"></i>
+            <i class="fa-solid fa-heart icon-style" style="color:#ff6b6b;"></i>
+            <i class="fa-solid fa-magnifying-glass icon-style"></i>
+            <i class="fa-solid fa-gear icon-style"></i>
+        </div>
+    </div>
+
+    <!-- 14. CSS LINKS -->
+    <div class="section">
+        <h2>14. CSS Links</h2>
+        <p style="line-height:2.5;">
+            <a href="#">a:link — belum dikunjungi (biru)</a> &nbsp;|&nbsp;
+            <a href="#visited" style="color:#8338ec;">a:visited (ungu)</a> &nbsp;|&nbsp;
+            <a href="#hover">a:hover — coba hover (merah)</a>
+        </p>
+        <p style="font-size:13px; color:#888;">Urutan wajib: <strong>L</strong>ink → <strong>V</strong>isited → <strong>H</strong>over → <strong>A</strong>ctive (LVHA)</p>
+    </div>
+
+    <!-- 15. CSS LISTS -->
+    <div class="section">
+        <h2>15. CSS Lists</h2>
+        <div class="flex-wrap" style="align-items:flex-start; gap:30px;">
+            <div>
+                <p style="font-size:13px; color:#888; margin-bottom:6px;">Unordered — square:</p>
+                <ul class="list-square">
+                    <li>Item pertama</li>
+                    <li>Item kedua</li>
+                    <li>Item ketiga</li>
+                </ul>
+            </div>
+            <div>
+                <p style="font-size:13px; color:#888; margin-bottom:6px;">Ordered — upper-roman:</p>
+                <ol class="list-roman">
+                    <li>Item pertama</li>
+                    <li>Item kedua</li>
+                    <li>Item ketiga</li>
+                </ol>
+            </div>
+            <div>
+                <p style="font-size:13px; color:#888; margin-bottom:6px;">No style (navigasi):</p>
+                <ul class="no-style-list">
+                    <li style="padding:4px 0; border-bottom:1px solid #eee;">Tanpa marker</li>
+                    <li style="padding:4px 0; border-bottom:1px solid #eee;">Tanpa padding</li>
+                    <li style="padding:4px 0;">Clean list</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 16. CSS TABLES -->
+    <div class="section">
+        <h2>16. CSS Tables</h2>
+        <table class="table-example">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Property CSS</th>
+                    <th>Fungsi</th>
+                    <th>Contoh Nilai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>border-collapse</td>
+                    <td>Menggabungkan border sel</td>
+                    <td>collapse / separate</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>text-align</td>
+                    <td>Rata teks dalam sel</td>
+                    <td>left / center / right</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>padding</td>
+                    <td>Jarak dalam sel</td>
+                    <td>10px 16px</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>nth-child(even)</td>
+                    <td>Warna baris selang-seling (zebra)</td>
+                    <td>background-color</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>tr:hover</td>
+                    <td>Highlight baris saat hover</td>
+                    <td>background-color</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>vertical-align</td>
+                    <td>Posisi vertikal konten sel</td>
+                    <td>top / middle / bottom</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
