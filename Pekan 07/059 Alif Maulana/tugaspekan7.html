@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Space - Ultra Dark Edition</title>
+
+    <style>
+        /* Definisi Palette Warna Ultra Dark */
+        :root {
+            --pitch-black: #000000;
+            --deep-charcoal: #0a0a0a;
+            --border-color: #1e1e1e;
+            --accent-silver: #e0e0e0;
+            --accent-dim: #888888;
+            --glass-black: rgba(255, 255, 255, 0.03);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background-color: var(--pitch-black);
+            color: var(--accent-silver);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Header dengan gaya minimalis gelap */
+        header {
+            background: linear-gradient(to bottom, #0d0d0d, var(--pitch-black));
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        header p {
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: var(--accent-dim);
+            font-size: 0.9rem;
+        }
+
+        /* Navigasi Stealth */
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 18px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        nav a {
+            color: var(--accent-dim);
+            margin: 0 25px;
+            text-decoration: none;
+            font-weight: 400;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        /* Container dengan konsep Dark Glass */
+        .container {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 50px;
+            background: var(--glass-black);
+            border: 1px solid var(--border-color);
+            border-radius: 4px; /* Sudut lebih tajam untuk kesan profesional */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: #ffffff;
+            border-left: 2px solid #ffffff;
+            padding-left: 20px;
+            letter-spacing: 1px;
+        }
+
+        .container p {
+            line-height: 2;
+            margin-bottom: 35px;
+            color: var(--accent-dim);
+            font-weight: 300;
+            text-align: justify;
+        }
+
+        .container h3 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            background: rgba(255, 255, 255, 0.01);
+            margin-bottom: 15px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            color: var(--accent-dim);
+        }
+
+        ul li:hover {
+            background: #ffffff;
+            color: #000000;
+            transform: translateY(-5px);
+            border-color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            background-color: var(--pitch-black);
+            color: #444444;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.75rem;
+            border-top: 1px solid var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        footer span {
+            color: var(--accent-silver);
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Digital Space</h1>
+    <p>Minimalism & Sophistication in Technology</p>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Projects</a>
+    <a href="#">Contact</a>
+</nav>
+
+<div class="container">
+    <h2>Konsep Dark Aesthetic</h2>
+    <p>
+        Implementasi warna hitam legam pada antarmuka web ini bertujuan untuk menciptakan fokus visual yang mendalam. Dengan menghilangkan distraksi warna yang berlebihan, pengguna dapat lebih terkonsentrasi pada konten utama. Desain ini menggunakan standar kontras yang optimal untuk penggunaan jangka panjang di lingkungan dengan cahaya rendah.
+    </p>
+
+    <h3>Kurikulum Informatika</h3>
+    <ul>
+        <li>Arsitektur Sistem Informasi Modern</li>
+        <li>Algoritma & Struktur Data Lanjut</li>
+        <li>Pengembangan Aplikasi Berbasis Cloud</li>
+        <li>Keamanan Jaringan & Kriptografi</li>
+    </ul>
+</div>
+
+<footer>
+    <p>© 2026 - Engineered by <span>Alif Maulana</span> | Informatics Education UTM</p>
+</footer>
+
+</body>
+</html>
