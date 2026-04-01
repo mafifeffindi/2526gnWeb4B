@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Sederhana - Dark Edition</title>
+
+<style>
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',Segoe UI, sans-serif;
+    background:#000;
+    color:#e0e0e0;
+    line-height:1.6;
+}
+
+/* ANIMASI */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+/* HEADER */
+header{
+    text-align:center;
+    padding:50px 20px;
+    border-bottom:1px solid #222;
+    animation:fadeIn 1s ease;
+}
+
+header h1{
+    font-size:2.6rem;
+    letter-spacing:2px;
+}
+
+header p{
+    color:#888;
+    margin-top:5px;
+}
+
+.identity{
+    margin-top:15px;
+    font-size:0.9rem;
+    color:#bbbbbb;
+}
+
+/* NAVBAR */
+nav{
+    background:#0a0a0a;
+    text-align:center;
+    padding:15px;
+    position:sticky;
+    top:0;
+    border-bottom:1px solid #222;
+}
+
+nav a{
+    color:#aaa;
+    text-decoration:none;
+    margin:0 18px;
+    text-transform:uppercase;
+    font-size:0.9rem;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#fff;
+    text-shadow:0 0 10px white;
+}
+
+/* CONTAINER */
+.container{
+    max-width:850px;
+    margin:50px auto;
+    padding:35px;
+    background:#070707;
+    border-radius:15px;
+    border:1px solid #1f1f1f;
+    box-shadow:0 15px 40px rgba(0,0,0,0.6);
+    animation:fadeIn 1.3s ease;
+}
+
+.container h2{
+    border-left:5px solid #555;
+    padding-left:15px;
+    margin-bottom:20px;
+}
+
+.container p{
+    color:#bdbdbd;
+    margin-bottom:25px;
+    text-align:justify;
+}
+
+/* LIST */
+ul{
+    list-style:none;
+}
+
+ul li{
+    padding:10px;
+    margin-bottom:10px;
+    background:#0f0f0f;
+    border-radius:8px;
+    transition:.3s;
+}
+
+ul li:hover{
+    transform:translateX(10px);
+    background:#151515;
+    color:white;
+}
+
+/* FOOTER */
+footer{
+    text-align:center;
+    padding:25px;
+    border-top:1px solid #111;
+    color:#666;
+    font-size:0.85rem;
+    margin-top:60px;
+}
+
+footer span{
+    color:#aaa;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Website Sederhana</h1>
+    <p>Eksplorasi Desain Dark Minimalist</p>
+
+    <!-- IDENTITAS -->
+    <div class="identity">
+        Rizki Fauzia Putri • NIM 240631100072
+    </div>
+</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Profil</a>
+    <a href="#">Kontak</a>
+</nav>
+
+<div class="container">
+    <h2>Selamat Datang</h2>
+    <p>
+        Website ini merupakan contoh implementasi HTML dan CSS dengan konsep dark minimalist.
+        Desain menggunakan warna gelap untuk memberikan kesan modern, futuristik, serta
+        meningkatkan kenyamanan visual pengguna saat membaca konten dalam waktu lama.
+    </p>
+
+    <h3>Materi Dasar HTML</h3>
+    <ul>
+        <li>Struktur Dokumen HTML5</li>
+        <li>Semantik Heading dan Paragraf</li>
+        <li>Integrasi Hyperlink Navigasi</li>
+        <li>Pengelolaan List Dinamis</li>
+    </ul>
+</div>
+
+<footer>
+    <p>
+        &copy; 2026 - Pendidikan Informatika UTM <br>
+        <span>Rizki Fauzia Putri | 240631100072</span>
+    </p>
+</footer>
+
+</body>
+</html>
