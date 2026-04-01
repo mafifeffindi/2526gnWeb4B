@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARJUN.DEV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Bebas+Neue&family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:        #0a0a0f;
+            --bg2:       #0f0f1a;
+            --panel:     #12121f;
+            --border:    #2a2a3e;
+            --amber:     #ffb300;
+            --amber2:    #ff8c00;
+            --amber-dim: rgba(255,179,0,0.12);
+            --amber-glow:rgba(255,179,0,0.25);
+            --red:       #ff4757;
+            --green:     #2ed573;
+            --cyan:      #1e90ff;
+            --text:      #e8e0cc;
+            --text-dim:  #7a7060;
+            --text-mid:  #b0a890;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            cursor: crosshair;
+        }
+
+        /* scanline overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0,0,0,0.07) 2px,
+                rgba(0,0,0,0.07) 4px
+            );
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        /* noise grain */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: var(--panel);
+            border-bottom: 1px solid var(--border);
+            padding: 0 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 56px;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.8rem;
+            color: var(--amber);
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px var(--amber-glow), 0 0 40px rgba(255,179,0,0.1);
+            position: relative;
+        }
+
+        .logo::after {
+            content: '_';
+            animation: blink 1s step-end infinite;
+            color: var(--amber);
+        }
+
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .header-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--green);
+        }
+
+        .dot-online {
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
+            animation: pulse-dot 2s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { box-shadow: 0 0 6px var(--green); }
+            50%       { box-shadow: 0 0 14px var(--green), 0 0 28px rgba(46,213,115,0.3); }
+        }
+
+        .ver-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            border: 1px solid var(--border);
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            padding: 12px 24px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            cursor: crosshair;
+            position: relative;
+            transition: all 0.2s;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        nav button::before {
+            content: '> ';
+            opacity: 0;
+            transition: opacity 0.2s;
+            color: var(--amber);
+        }
+
+        nav button:hover { color: var(--amber); }
+        nav button:hover::before { opacity: 1; }
+
+        nav button.aktif {
+            color: var(--amber);
+            background: var(--amber-dim);
+            border-bottom: 2px solid var(--amber);
+        }
+
+        nav button.aktif::before { opacity: 1; }
+
+        /* ===== PAGE SYSTEM ===== */
+        .page { display: none; }
+        .page.tampil {
+            display: block;
+            animation: terminalIn 0.3s ease;
+        }
+
+        @keyframes terminalIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== CONTAINER / PANEL ===== */
+        .panel {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin: 16px;
+            overflow: hidden;
+        }
+
+        .panel-titlebar {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .win-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+        }
+
+        .win-dot.r { background: var(--red); box-shadow: 0 0 6px var(--red); }
+        .win-dot.y { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+        .win-dot.g { background: var(--green); box-shadow: 0 0 6px var(--green); }
+
+        .panel-title {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-left: 6px;
+            letter-spacing: 1px;
+        }
+
+        .panel-body { padding: 20px; }
+
+        /* ===== TYPOGRAPHY ===== */
+        .section-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--amber);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to right, var(--border), transparent);
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.2rem;
+            color: var(--text);
+            letter-spacing: 2px;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        h2 .hl { color: var(--amber); }
+
+        h3 {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--amber);
+            margin: 20px 0 10px;
+            letter-spacing: 1px;
+        }
+
+        p {
+            font-size: 0.88rem;
+            color: var(--text-mid);
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        /* ===== HOME ===== */
+        .hero-terminal {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 18px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.78rem;
+            line-height: 2;
+        }
+
+        .t-line { display: flex; gap: 10px; }
+        .t-prompt { color: var(--green); }
+        .t-cmd { color: var(--text); }
+        .t-out { color: var(--text-mid); padding-left: 20px; }
+        .t-out .hi { color: var(--amber); }
+        .t-out .ok { color: var(--green); }
+        .t-out .err { color: var(--red); }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 8px; height: 14px;
+            background: var(--amber);
+            vertical-align: middle;
+            animation: blink 1s step-end infinite;
+            margin-left: 4px;
+        }
+
+        /* STAT HEX */
+        .hex-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 16px 0;
+        }
+
+        .hex-card {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 14px 10px;
+            text-align: center;
+            background: var(--bg);
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .hex-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--amber);
+        }
+
+        .hex-card:hover { border-color: var(--amber); }
+
+        .hex-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+            color: var(--amber);
+            line-height: 1;
+            text-shadow: 0 0 20px var(--amber-glow);
+        }
+
+        .hex-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+
+        /* PROGRESS */
+        .prog-item {
+            margin-bottom: 14px;
+        }
+
+        .prog-top {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            margin-bottom: 5px;
+        }
+
+        .prog-name { color: var(--text); }
+        .prog-val  { color: var(--amber); }
+
+        .prog-track {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            height: 8px;
+            border-radius: 0;
+            overflow: hidden;
+        }
+
+        .prog-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--amber2), var(--amber));
+            width: 0;
+            transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 0 10px var(--amber-glow);
+            position: relative;
+        }
+
+        .prog-fill::after {
+            content: '';
+            position: absolute;
+            right: 0; top: 0; bottom: 0;
+            width: 4px;
+            background: white;
+            opacity: 0.6;
+        }
+
+        /* QUIZ */
+        .quiz-box {
+            border: 1px solid var(--amber);
+            border-radius: 4px;
+            padding: 18px;
+            background: rgba(255,179,0,0.04);
+            margin-top: 18px;
+        }
+
+        .quiz-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--amber);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-q {
+            font-size: 0.88rem;
+            color: var(--text);
+            font-weight: 500;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+
+        .quiz-opts {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .q-btn {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text-mid);
+            padding: 10px 12px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            cursor: crosshair;
+            text-align: left;
+            border-radius: 2px;
+            transition: all 0.15s;
+        }
+
+        .q-btn:hover { border-color: var(--amber); color: var(--amber); background: var(--amber-dim); }
+        .q-btn.benar { border-color: var(--green); color: var(--green); background: rgba(46,213,115,0.08); }
+        .q-btn.salah { border-color: var(--red); color: var(--red); background: rgba(255,71,87,0.08); }
+
+        .quiz-fb {
+            margin-top: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            min-height: 18px;
+            text-align: center;
+        }
+
+        /* ===== PROFIL ===== */
+        .id-card {
+            border: 1px solid var(--amber);
+            border-radius: 4px;
+            padding: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            background: var(--bg);
+        }
+
+        .id-top {
+            background: linear-gradient(135deg, var(--amber2), var(--amber));
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .id-avatar {
+            width: 72px; height: 72px;
+            border-radius: 4px;
+            background: var(--bg);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.8rem;
+            color: var(--amber);
+            flex-shrink: 0;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .id-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            color: var(--bg);
+            letter-spacing: 3px;
+            line-height: 1;
+        }
+
+        .id-role {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: rgba(10,10,15,0.7);
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        .id-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: rgba(10,10,15,0.5);
+            margin-top: 6px;
+        }
+
+        .id-bottom {
+            padding: 16px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .id-field .lbl {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .id-field .val {
+            font-size: 0.85rem;
+            color: var(--text);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* SKILL BARS */
+        .sk-item { margin-bottom: 14px; }
+
+        .sk-head {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            margin-bottom: 5px;
+            color: var(--text-mid);
+        }
+
+        .sk-head .pct { color: var(--amber); }
+
+        .sk-bar {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            height: 6px;
+            overflow: hidden;
+        }
+
+        .sk-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--amber2), var(--amber));
+            width: 0;
+            transition: width 1.3s cubic-bezier(0.4,0,0.2,1);
+            box-shadow: 0 0 8px var(--amber-glow);
+        }
+
+        /* TIMELINE */
+        .tl { padding-left: 20px; border-left: 1px solid var(--border); }
+
+        .tl-node {
+            position: relative;
+            margin-bottom: 18px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            background: var(--bg);
+            transition: border-color 0.2s;
+        }
+
+        .tl-node:hover { border-color: var(--amber); }
+
+        .tl-node::before {
+            content: '◆';
+            position: absolute;
+            left: -28px; top: 14px;
+            color: var(--amber);
+            font-size: 0.7rem;
+        }
+
+        .tl-yr {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--amber);
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .tl-ttl {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .tl-txt { font-size: 0.8rem; color: var(--text-dim); margin: 4px 0 0; line-height: 1.6; }
+
+        /* ===== PROJEK ===== */
+        .proj-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .proj-card {
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 16px;
+            background: var(--bg);
+            cursor: crosshair;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .proj-card::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--amber);
+            transform: scaleY(0);
+            transition: transform 0.2s;
+            transform-origin: bottom;
+        }
+
+        .proj-card:hover { border-color: var(--amber); background: var(--amber-dim); }
+        .proj-card:hover::before { transform: scaleY(1); }
+
+        .proj-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+
+        .proj-ttl {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            color: var(--text);
+        }
+
+        .proj-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border: 1px solid var(--amber);
+            color: var(--amber);
+            border-radius: 2px;
+            letter-spacing: 1px;
+        }
+
+        .proj-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; margin: 0; }
+
+        .proj-tags { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+
+        .p-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            padding: 2px 7px;
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            color: var(--text-dim);
+            border-radius: 2px;
+        }
+
+        /* GALERI */
+        .gal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .gal-item {
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            aspect-ratio: 4/3;
+            background: var(--bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: crosshair;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gal-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--amber-dim), transparent);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .gal-item:hover { border-color: var(--amber); }
+        .gal-item:hover::after { opacity: 1; }
+        .gal-item:hover .gal-icon { text-shadow: 0 0 20px var(--amber); }
+
+        .gal-icon { font-size: 2rem; transition: text-shadow 0.2s; }
+        .gal-lbl {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open { display: flex; }
+
+        .modal-box {
+            background: var(--panel);
+            border: 1px solid var(--amber);
+            border-radius: 4px;
+            width: 90%;
+            max-width: 340px;
+            overflow: hidden;
+            animation: modalPop 0.2s ease;
+        }
+
+        @keyframes modalPop {
+            from { transform: scale(0.9); opacity: 0; }
+            to   { transform: scale(1); opacity: 1; }
+        }
+
+        .modal-bar {
+            background: var(--amber);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-bar .ttl {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--bg);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--bg);
+            font-size: 1rem;
+            cursor: crosshair;
+            font-weight: 700;
+        }
+
+        .modal-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .modal-icon { font-size: 3rem; margin-bottom: 10px; }
+        .modal-content h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            color: var(--amber);
+            letter-spacing: 2px;
+            margin: 0 0 8px;
+        }
+
+        .modal-content p { font-size: 0.83rem; color: var(--text-mid); margin: 0; }
+
+        /* ===== KONTAK ===== */
+        .kontak-head {
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 18px;
+            background: var(--bg);
+            margin-bottom: 18px;
+            text-align: center;
+        }
+
+        .kontak-head .big { font-size: 2.5rem; margin-bottom: 8px; }
+        .kontak-head .ttl {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            color: var(--amber);
+        }
+        .kontak-head .sub { font-size: 0.78rem; color: var(--text-dim); font-family: 'Space Mono', monospace; }
+
+        .k-links { display: flex; flex-direction: column; gap: 8px; }
+
+        .k-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            background: var(--bg);
+            cursor: crosshair;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .k-link:hover { border-color: var(--amber); background: var(--amber-dim); }
+        .k-link:hover .k-arrow { color: var(--amber); transform: translateX(4px); }
+
+        .k-ico {
+            width: 38px; height: 38px;
+            border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
+            border-radius: 2px;
+            flex-shrink: 0;
+            background: var(--bg2);
+        }
+
+        .k-info .plat {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .k-info .handle { font-size: 0.88rem; font-weight: 600; color: var(--text); }
+        .k-arrow { margin-left: auto; color: var(--text-dim); font-size: 1rem; transition: all 0.2s; }
+
+        /* FORM */
+        .form-terminal {
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 18px;
+        }
+
+        .form-bar {
+            background: var(--bg2);
+            border-bottom: 1px solid var(--border);
+            padding: 8px 14px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .form-inner { padding: 18px; background: var(--bg); }
+
+        .f-field {
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            margin-bottom: 10px;
+            background: var(--panel);
+            transition: border-color 0.2s;
+        }
+
+        .f-field:focus-within { border-color: var(--amber); }
+
+        .f-pre {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--amber);
+            padding: 0 10px;
+            border-right: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .f-field input,
+        .f-field textarea {
+            flex: 1;
+            background: none;
+            border: none;
+            outline: none;
+            padding: 12px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text);
+            resize: vertical;
+        }
+
+        .f-field textarea { min-height: 90px; }
+
+        .f-field input::placeholder,
+        .f-field textarea::placeholder { color: var(--text-dim); }
+
+        .btn-transmit {
+            width: 100%;
+            background: var(--amber);
+            color: var(--bg);
+            border: none;
+            padding: 13px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            cursor: crosshair;
+            border-radius: 2px;
+            transition: all 0.2s;
+            margin-top: 4px;
+        }
+
+        .btn-transmit:hover {
+            background: var(--amber2);
+            box-shadow: 0 0 20px var(--amber-glow);
+        }
+
+        .tx-success {
+            display: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--green);
+            margin-top: 10px;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--green);
+            background: rgba(46,213,115,0.06);
+            border-radius: 2px;
+        }
+
+        /* CHAR COUNT */
+        .char-info {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+            text-align: right;
+            margin: -6px 0 10px;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--panel);
+            border-top: 1px solid var(--border);
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .ft-left {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--text-dim);
+        }
+
+        .ft-left span { color: var(--amber); }
+
+        .ft-right {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--text-dim);
+        }
+
+        /* SCROLL BAR */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--amber); }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="header-inner">
+        <div class="logo">ARJUN</div>
+        <div style="display:flex;align-items:center;gap:12px;">
+            <div class="header-status">
+                <div class="dot-online"></div>
+                ONLINE
+            </div>
+            <div class="ver-tag">v1.0.0</div>
+        </div>
+    </div>
+</header>
+
+<!-- NAV -->
+<nav>
+    <button class="aktif" onclick="ganti('home',this)">[HOME]</button>
+    <button onclick="ganti('profil',this)">[PROFIL]</button>
+    <button onclick="ganti('projek',this)">[PROJEK]</button>
+    <button onclick="ganti('kontak',this)">[KONTAK]</button>
+</nav>
+
+<!-- ======================== HOME ======================== -->
+<div id="page-home" class="page tampil">
+    <div class="panel">
+        <div class="panel-titlebar">
+            <div class="win-dot r"></div>
+            <div class="win-dot y"></div>
+            <div class="win-dot g"></div>
+            <div class="panel-title">~/arjun/home — bash</div>
+        </div>
+        <div class="panel-body">
+
+            <div class="hero-terminal">
+                <div class="t-line"><span class="t-prompt">arjun@dev:~$</span><span class="t-cmd"> whoami</span></div>
+                <div class="t-out">→ <span class="hi">Arjun</span> — Web Developer in the making</div>
+                <div class="t-line"><span class="t-prompt">arjun@dev:~$</span><span class="t-cmd"> status --check</span></div>
+                <div class="t-out">→ Mode belajar: <span class="ok">AKTIF ✓</span></div>
+                <div class="t-out">→ Semangat: <span class="ok">100% ✓</span></div>
+                <div class="t-out">→ Error hari ini: <span class="err">3 bug (sedang difix)</span></div>
+                <div class="t-line"><span class="t-prompt">arjun@dev:~$</span><span class="t-cmd"> _<span class="typing-cursor"></span></span></div>
+            </div>
+
+            <div class="section-label">// stat sistem</div>
+            <div class="hex-grid">
+                <div class="hex-card">
+                    <div class="hex-num" data-target="6">0</div>
+                    <div class="hex-label">Materi</div>
+                </div>
+                <div class="hex-card">
+                    <div class="hex-num" data-target="3">0</div>
+                    <div class="hex-label">Projek</div>
+                </div>
+                <div class="hex-card">
+                    <div class="hex-num" data-target="42">0</div>
+                    <div class="hex-label">Hari</div>
+                </div>
+            </div>
+
+            <div class="section-label">// loading materi</div>
+            <div class="prog-item">
+                <div class="prog-top"><span class="prog-name">HTML</span><span class="prog-val">88%</span></div>
+                <div class="prog-track"><div class="prog-fill" data-lebar="88"></div></div>
+            </div>
+            <div class="prog-item">
+                <div class="prog-top"><span class="prog-name">CSS / Flexbox</span><span class="prog-val">72%</span></div>
+                <div class="prog-track"><div class="prog-fill" data-lebar="72"></div></div>
+            </div>
+            <div class="prog-item">
+                <div class="prog-top"><span class="prog-name">JavaScript</span><span class="prog-val">40%</span></div>
+                <div class="prog-track"><div class="prog-fill" data-lebar="40"></div></div>
+            </div>
+            <div class="prog-item">
+                <div class="prog-top"><span class="prog-name">Responsive Design</span><span class="prog-val">55%</span></div>
+                <div class="prog-track"><div class="prog-fill" data-lebar="55"></div></div>
+            </div>
+
+            <div class="quiz-box">
+                <div class="quiz-tag">// module: quiz_html.js</div>
+                <div class="quiz-q" id="quiz-soal">Memuat soal...</div>
+                <div class="quiz-opts" id="quiz-opts"></div>
+                <div class="quiz-fb" id="quiz-fb"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ======================== PROFIL ======================== -->
+<div id="page-profil" class="page">
+    <div class="panel">
+        <div class="panel-titlebar">
+            <div class="win-dot r"></div>
+            <div class="win-dot y"></div>
+            <div class="win-dot g"></div>
+            <div class="panel-title">~/arjun/profil — id-card.json</div>
+        </div>
+        <div class="panel-body">
+
+            <div class="id-card">
+                <div class="id-top">
+                    <div class="id-avatar">A</div>
+                    <div>
+                        <div class="id-name">ARJUN</div>
+                        <div class="id-role">// WEB DEVELOPER IN PROGRESS</div>
+                        <div class="id-num">ID: ARJ-2026-0001</div>
+                    </div>
+                </div>
+                <div class="id-bottom">
+                    <div class="id-field">
+                        <div class="lbl">Status</div>
+                        <div class="val">🔥 Aktif Belajar</div>
+                    </div>
+                    <div class="id-field">
+                        <div class="lbl">Lokasi</div>
+                        <div class="val">🌏 Indonesia</div>
+                    </div>
+                    <div class="id-field">
+                        <div class="lbl">Stack</div>
+                        <div class="val">HTML · CSS · JS</div>
+                    </div>
+                    <div class="id-field">
+                        <div class="lbl">Tujuan</div>
+                        <div class="val">Full-Stack Dev</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-label">// skill_matrix[]</div>
+            <div class="sk-item">
+                <div class="sk-head"><span>HTML5</span><span class="pct">88%</span></div>
+                <div class="sk-bar"><div class="sk-fill" data-lebar="88"></div></div>
+            </div>
+            <div class="sk-item">
+                <div class="sk-head"><span>CSS3 + Flexbox</span><span class="pct">72%</span></div>
+                <div class="sk-bar"><div class="sk-fill" data-lebar="72"></div></div>
+            </div>
+            <div class="sk-item">
+                <div class="sk-head"><span>JavaScript ES6</span><span class="pct">40%</span></div>
+                <div class="sk-bar"><div class="sk-fill" data-lebar="40"></div></div>
+            </div>
+            <div class="sk-item">
+                <div class="sk-head"><span>UI/UX Design</span><span class="pct">58%</span></div>
+                <div class="sk-bar"><div class="sk-fill" data-lebar="58"></div></div>
+            </div>
+            <div class="sk-item">
+                <div class="sk-head"><span>Git / GitHub</span><span class="pct">45%</span></div>
+                <div class="sk-bar"><div class="sk-fill" data-lebar="45"></div></div>
+            </div>
+
+            <div class="section-label">// git log --timeline</div>
+            <div class="tl">
+                <div class="tl-node">
+                    <div class="tl-yr">JAN 2026</div>
+                    <div class="tl-ttl">Commit #1 — Mulai HTML</div>
+                    <p class="tl-txt">Pertama kali nulis &lt;html&gt; dan berhasil nampil di browser. Euphoria level MAX.</p>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-yr">FEB 2026</div>
+                    <div class="tl-ttl">Commit #2 — Masuk CSS</div>
+                    <p class="tl-txt">Belajar styling, Flexbox, animasi. Semua elemen tiba-tiba punya bentuk yang bener.</p>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-yr">MAR 2026</div>
+                    <div class="tl-ttl">Commit #3 — JavaScript</div>
+                    <p class="tl-txt">Pertama kali JS-nya jalan. Banyak error, tapi seru banget debugging.</p>
+                </div>
+                <div class="tl-node">
+                    <div class="tl-yr">APR 2026</div>
+                    <div class="tl-ttl">Commit #4 — Deploy Website Ini 🎉</div>
+                    <p class="tl-txt">Website personal pertama yang beneran kelihatan keren. Milestone unlocked!</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ======================== PROJEK ======================== -->
+<div id="page-projek" class="page">
+    <div class="panel">
+        <div class="panel-titlebar">
+            <div class="win-dot r"></div>
+            <div class="win-dot y"></div>
+            <div class="win-dot g"></div>
+            <div class="panel-title">~/arjun/projek — ls -la</div>
+        </div>
+        <div class="panel-body">
+
+            <div class="section-label">// direktori projek</div>
+            <div class="proj-list">
+                <div class="proj-card" onclick="bukaModal('p1')">
+                    <div class="proj-head">
+                        <div class="proj-ttl">PORTFOLIO WEBSITE</div>
+                        <span class="proj-badge">LIVE</span>
+                    </div>
+                    <p class="proj-desc">Website personal pertama menggunakan HTML & CSS murni. Fully responsive dengan tampilan clean.</p>
+                    <div class="proj-tags">
+                        <span class="p-tag">HTML</span>
+                        <span class="p-tag">CSS</span>
+                        <span class="p-tag">Responsive</span>
+                    </div>
+                </div>
+                <div class="proj-card" onclick="bukaModal('p2')">
+                    <div class="proj-head">
+                        <div class="proj-ttl">KALKULATOR APP</div>
+                        <span class="proj-badge">DONE</span>
+                    </div>
+                    <p class="proj-desc">Kalkulator interaktif dengan operasi dasar matematika dan tampilan dark-mode.</p>
+                    <div class="proj-tags">
+                        <span class="p-tag">HTML</span>
+                        <span class="p-tag">CSS</span>
+                        <span class="p-tag">JavaScript</span>
+                    </div>
+                </div>
+                <div class="proj-card" onclick="bukaModal('p3')">
+                    <div class="proj-head">
+                        <div class="proj-ttl">TODO LIST APP</div>
+                        <span class="proj-badge">WIP</span>
+                    </div>
+                    <p class="proj-desc">Aplikasi manajemen tugas dengan fitur tambah, hapus, dan filter berdasarkan status.</p>
+                    <div class="proj-tags">
+                        <span class="p-tag">JS</span>
+                        <span class="p-tag">LocalStorage</span>
+                        <span class="p-tag">CSS Grid</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-label" style="margin-top:20px;">// screenshot gallery</div>
+            <div class="gal-grid">
+                <div class="gal-item" onclick="bukaModal('g1')">
+                    <div class="gal-icon">🌐</div>
+                    <div class="gal-lbl">PORTFOLIO</div>
+                </div>
+                <div class="gal-item" onclick="bukaModal('g2')">
+                    <div class="gal-icon">🎨</div>
+                    <div class="gal-lbl">CSS LAYOUT</div>
+                </div>
+                <div class="gal-item" onclick="bukaModal('g3')">
+                    <div class="gal-icon">🧮</div>
+                    <div class="gal-lbl">KALKULATOR</div>
+                </div>
+                <div class="gal-item" onclick="bukaModal('g4')">
+                    <div class="gal-icon">📋</div>
+                    <div class="gal-lbl">TODO LIST</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ======================== KONTAK ======================== -->
+<div id="page-kontak" class="page">
+    <div class="panel">
+        <div class="panel-titlebar">
+            <div class="win-dot r"></div>
+            <div class="win-dot y"></div>
+            <div class="win-dot g"></div>
+            <div class="panel-title">~/arjun/kontak — network.config</div>
+        </div>
+        <div class="panel-body">
+
+            <div class="kontak-head">
+                <div class="big">📡</div>
+                <div class="ttl">ESTABLISH CONNECTION</div>
+                <div class="sub">// ping me anytime — response time: fast</div>
+            </div>
+
+            <div class="section-label">// available channels</div>
+            <div class="k-links">
+                <div class="k-link">
+                    <div class="k-ico">📘</div>
+                    <div class="k-info">
+                        <div class="plat">Facebook</div>
+                        <div class="handle">@arjun.dev</div>
+                    </div>
+                    <div class="k-arrow">›</div>
+                </div>
+                <div class="k-link">
+                    <div class="k-ico">📸</div>
+                    <div class="k-info">
+                        <div class="plat">Instagram</div>
+                        <div class="handle">@arjun.dev</div>
+                    </div>
+                    <div class="k-arrow">›</div>
+                </div>
+                <div class="k-link">
+                    <div class="k-ico">💬</div>
+                    <div class="k-info">
+                        <div class="plat">WhatsApp</div>
+                        <div class="handle">+62 xxx-xxxx-xxxx</div>
+                    </div>
+                    <div class="k-arrow">›</div>
+                </div>
+                <div class="k-link">
+                    <div class="k-ico">💻</div>
+                    <div class="k-info">
+                        <div class="plat">GitHub</div>
+                        <div class="handle">github.com/arjun-dev</div>
+                    </div>
+                    <div class="k-arrow">›</div>
+                </div>
+            </div>
+
+            <div class="form-terminal">
+                <div class="form-bar">// compose_message.sh — press TRANSMIT to send</div>
+                <div class="form-inner">
+                    <div class="f-field">
+                        <span class="f-pre">name:~$</span>
+                        <input type="text" id="f-nama" placeholder="ketik nama kamu...">
+                    </div>
+                    <div class="f-field">
+                        <span class="f-pre">subj:~$</span>
+                        <input type="text" id="f-subj" placeholder="subjek pesan...">
+                    </div>
+                    <div class="f-field">
+                        <span class="f-pre">msg:~$</span>
+                        <textarea id="f-pesan" placeholder="isi pesanmu..." oninput="hitungChar()"></textarea>
+                    </div>
+                    <div class="char-info">chars: <span id="ch-count">0</span>/200</div>
+                    <button class="btn-transmit" onclick="transmit()">▶ TRANSMIT MESSAGE</button>
+                    <div class="tx-success" id="tx-ok">// SUCCESS: Pesan dikirim! Arjun akan membalas secepatnya. ✓</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="tutupModal()">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-bar">
+            <span class="ttl" id="m-judul">DETAIL</span>
+            <button class="modal-close" onclick="tutupModal()">✕</button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-icon" id="m-icon">🌐</div>
+            <h3 id="m-nama">Nama Projek</h3>
+            <p id="m-desc">Deskripsi projek ada di sini.</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="ft-left">© 2026 — <span>ARJUN</span></div>
+    <div class="ft-right">made with &lt;3 + ☕</div>
+</footer>
+
+<script>
+// ===== NAV =====
+function ganti(hal, btn) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('tampil'));
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('aktif'));
+    document.getElementById('page-' + hal).classList.add('tampil');
+    btn.classList.add('aktif');
+    if (hal === 'home') { animProg(); animCount(); }
+    if (hal === 'profil') animSkill();
+}
+
+// ===== COUNTERS =====
+function animCount() {
+    document.querySelectorAll('.hex-num').forEach(el => {
+        const t = +el.dataset.target;
+        let c = 0;
+        const step = Math.ceil(t / 25);
+        const iv = setInterval(() => {
+            c = Math.min(c + step, t);
+            el.textContent = c;
+            if (c >= t) clearInterval(iv);
+        }, 40);
+    });
+}
+
+// ===== PROGRESS =====
+function animProg() {
+    document.querySelectorAll('.prog-fill').forEach(el => {
+        el.style.width = el.dataset.lebar + '%';
+    });
+}
+
+// ===== SKILLS =====
+function animSkill() {
+    setTimeout(() => {
+        document.querySelectorAll('.sk-fill').forEach(el => {
+            el.style.width = el.dataset.lebar + '%';
+        });
+    }, 80);
+}
+
+// ===== QUIZ =====
+const qBank = [
+    { q:"Tag HTML untuk membuat tulisan tebal?", opts:["<strong>","<italic>","<color>","<size>"], ans:0 },
+    { q:"Apa fungsi tag <head> dalam HTML?", opts:["Isi utama halaman","Info metadata & judul","Navigasi halaman","Footer website"], ans:1 },
+    { q:"Property CSS untuk mengatur warna teks?", opts:["background","font-size","color","border"], ans:2 },
+    { q:"Tag untuk membuat list berurutan (angka)?", opts:["<ul>","<li>","<dl>","<ol>"], ans:3 },
+    { q:"Atribut <a> untuk menentukan tujuan link?", opts:["src","href","link","target"], ans:1 },
+    { q:"Cara menambahkan komentar di HTML?", opts:["// komentar","/* komentar */","<!-- komentar -->","# komentar"], ans:2 },
+];
+
+let qi = 0, qLock = false;
+
+function muatSoal() {
+    const s = qBank[qi];
+    document.getElementById('quiz-soal').textContent = `[${qi+1}/${qBank.length}] ${s.q}`;
+    document.getElementById('quiz-fb').textContent = '';
+    const wrap = document.getElementById('quiz-opts');
+    wrap.innerHTML = '';
+    s.opts.forEach((o, i) => {
+        const b = document.createElement('button');
+        b.className = 'q-btn';
+        b.textContent = `${String.fromCharCode(65+i)}) ${o}`;
+        b.onclick = () => jawab(i, s.ans);
+        wrap.appendChild(b);
+    });
+}
+
+function jawab(i, ans) {
+    if (qLock) return;
+    qLock = true;
+    const btns = document.querySelectorAll('.q-btn');
+    btns[i].classList.add(i === ans ? 'benar' : 'salah');
+    if (i !== ans) btns[ans].classList.add('benar');
+    const fb = document.getElementById('quiz-fb');
+    fb.style.color = i === ans ? 'var(--green)' : 'var(--red)';
+    fb.textContent = i === ans ? '// OUTPUT: CORRECT ✓ — next loading...' : '// OUTPUT: WRONG ✗ — correct answer highlighted';
+    setTimeout(() => {
+        qLock = false;
+        qi = (qi + 1) % qBank.length;
+        muatSoal();
+    }, 1900);
+}
+
+// ===== MODAL =====
+const mData = {
+    p1: { icon:'🌐', nama:'PORTFOLIO WEBSITE', desc:'Website personal HTML & CSS pertama Arjun. Fully responsive, clean layout, dan sudah deploy!' },
+    p2: { icon:'🧮', nama:'KALKULATOR APP', desc:'Kalkulator dengan dark-mode, semua operasi dasar matematis, dan animasi tombol interaktif.' },
+    p3: { icon:'📋', nama:'TODO LIST APP', desc:'App manajemen tugas dengan localStorage, filter status (all/active/done), dan drag-to-reorder.' },
+    g1: { icon:'🌐', nama:'PORTFOLIO SCREENSHOT', desc:'Tampilan halaman utama portfolio yang sudah dibuat dengan HTML & CSS murni.' },
+    g2: { icon:'🎨', nama:'CSS LAYOUT EXPERIMENT', desc:'Eksperimen dengan Flexbox dan CSS Grid untuk membuat layout multi-column yang rapi.' },
+    g3: { icon:'🧮', nama:'KALKULATOR PREVIEW', desc:'Preview tampilan kalkulator dark-mode dengan tombol-tombol beranimasi.' },
+    g4: { icon:'📋', nama:'TODO LIST PREVIEW', desc:'Tampilan app to-do list yang sudah fungsional dan punya filter status.' },
+};
+
+function bukaModal(id) {
+    const d = mData[id];
+    document.getElementById('m-judul').textContent = '// ' + d.nama;
+    document.getElementById('m-icon').textContent = d.icon;
+    document.getElementById('m-nama').textContent = d.nama;
+    document.getElementById('m-desc').textContent = d.desc;
+    document.getElementById('modal').classList.add('open');
+}
+
+function tutupModal() {
+    document.getElementById('modal').classList.remove('open');
+}
+
+// ===== FORM =====
+function hitungChar() {
+    const v = document.getElementById('f-pesan').value;
+    document.getElementById('ch-count').textContent = v.length;
+}
+
+function transmit() {
+    const n = document.getElementById('f-nama').value.trim();
+    const s = document.getElementById('f-subj').value.trim();
+    const m = document.getElementById('f-pesan').value.trim();
+    if (!n || !s || !m) { alert('// ERROR: Semua field wajib diisi!'); return; }
+    const ok = document.getElementById('tx-ok');
+    ok.style.display = 'block';
+    document.getElementById('f-nama').value = '';
+    document.getElementById('f-subj').value = '';
+    document.getElementById('f-pesan').value = '';
+    document.getElementById('ch-count').textContent = '0';
+    setTimeout(() => ok.style.display = 'none', 5000);
+}
+
+// ===== INIT =====
+muatSoal();
+animProg();
+animCount();
+</script>
+</body>
+</html>
