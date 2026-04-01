@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home - Dhani</title>
+
+<style>
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin:0;
+    background: linear-gradient(135deg, #04125e, #0a1b8f);
+    transition: 0.5s;
+}
+.dark {
+    background: #111;
+    color: white;
+}
+header {
+    background: linear-gradient(135deg, #1215b4, #1f22ff);
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+nav {
+    background:black;
+    text-align:center;
+    padding:10px;
+}
+nav a {
+    color:white;
+    margin:15px;
+    text-decoration:none;
+    font-weight:bold;
+}
+nav a.active {
+    color: yellow;
+}
+.container {
+    background:white;
+    margin:20px auto;
+    padding:20px;
+    border-radius:10px;
+    max-width:800px;
+    animation: fade 1s;
+}
+.dark .container {
+    background:#222;
+}
+button {
+    padding:10px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+}
+.toggle {
+    background:yellow;
+}
+footer {
+    background:black;
+    color:white;
+    text-align:center;
+    padding:10px;
+}
+@keyframes fade {
+    from {opacity:0;}
+    to {opacity:1;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Website Dhani 🚀</h1>
+<p id="clock"></p>
+<button class="toggle" onclick="toggleDark()">🌙 Dark Mode</button>
+</header>
+
+<nav>
+<a href="index.html" class="active">Home</a>
+<a href="profil.html">Profil</a>
+<a href="kontak.html">Kontak</a>
+</nav>
+
+<div class="container">
+<h2>Selamat Datang 🔥</h2>
+<p>Website ini sudah pakai fitur modern!</p>
+
+<button onclick="salam()">Klik Salam</button>
+<p id="hasil"></p>
+</div>
+
+<footer>
+<p>© dhanii ajaboss</p>
+</footer>
+
+<script>
+function salam(){
+document.getElementById("hasil").innerHTML="assalamualaikum bro 😎";
+}
+
+function toggleDark(){
+document.body.classList.toggle("dark");
+}
+
+function jam(){
+let waktu = new Date().toLocaleTimeString();
+document.getElementById("clock").innerHTML = waktu;
+}
+setInterval(jam,1000);
+</script>
+
+</body>
+</html>
