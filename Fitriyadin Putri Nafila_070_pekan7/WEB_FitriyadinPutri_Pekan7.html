@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Cute Estetik</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffd6e0, #d6f0ff);
+            color: #555;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(8px);
+            border-bottom: 2px dashed #ffc0cb;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        header .profile {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            background: #fff;
+            padding: 8px 16px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #ffb6c1;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #ffffffcc;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h2 {
+            margin-bottom: 10px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            background: #ffe4ec;
+            margin: 8px auto;
+            padding: 10px;
+            border-radius: 15px;
+            width: 70%;
+            transition: 0.3s;
+        }
+
+        ul li:hover {
+            background: #ffc1d6;
+            transform: scale(1.03);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @media (max-width: 600px) {
+            ul li {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🌸 Website 🌸</h1>
+    <div class="profile">
+        💖 Fitriyadin Putri Nafila • NIM: 070 💖
+    </div>
+</header>
+
+<nav>
+    <a href="#">🏠 Home</a>
+    <a href="#">👤 Profil</a>
+    <a href="#">📩 Kontak</a>
+</nav>
+
+<div class="container">
+    <h2>✨ Semangat Belajar HTML 💻✨</h2>
+    <p>
+        Tetap semangat belajar ya! Sedikit demi sedikit pasti bisa jadi jago bikin website keren 🚀
+    </p>
+
+    <h3>📚 Materi HTML</h3>
+    <ul>
+        <li>✨ Struktur HTML</li>
+        <li>✨ Heading & Paragraf</li>
+        <li>✨ Link</li>
+        <li>✨ List</li>
+    </ul>
+</div>
+
+<footer>
+    <p>💖 2026 - Belajar Web Seru 💖</p>
+    <p>👩‍💻 Fitriyadin Putri Nafila | NIM: 070</p>
+</footer>
+
+</body>
+</html>
