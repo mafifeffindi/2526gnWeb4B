@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Zaidan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --biru: #1a4b8c;
+            --biru-tua: #0f2d5a;
+            --biru-muda: #2e6bc4;
+            --aksen: #ff6b35;
+            --aksen2: #ffd166;
+            --putih: #ffffff;
+            --abu: #f0f4fb;
+            --teks: #1a1a2e;
+            --card-bg: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--abu);
+            color: var(--teks);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--biru-tua) 0%, var(--biru) 60%, var(--biru-muda) 100%);
+            color: white;
+            padding: 28px 24px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -60px; right: -60px;
+            width: 200px; height: 200px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -40px; left: -40px;
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background: rgba(255,107,53,0.12);
+        }
+
+        .header-chip {
+            display: inline-block;
+            background: rgba(255,107,53,0.25);
+            border: 1px solid rgba(255,107,53,0.5);
+            color: #ffb199;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            position: relative;
+        }
+
+        header h1 span { color: var(--aksen); }
+
+        header p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 4px;
+            font-weight: 300;
+            position: relative;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            background: var(--biru-tua);
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.6);
+            padding: 13px 22px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.25s;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        nav button::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%; right: 50%;
+            height: 3px;
+            background: var(--aksen);
+            border-radius: 3px 3px 0 0;
+            transition: left 0.25s, right 0.25s;
+        }
+
+        nav button:hover { color: white; background: rgba(255,255,255,0.05); }
+        nav button.aktif { color: var(--aksen); }
+        nav button.aktif::after { left: 10px; right: 10px; }
+
+        /* ===== PAGE SYSTEM ===== */
+        .page { display: none; animation: slideUp 0.35s ease; }
+        .page.tampil { display: block; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .container {
+            padding: 24px;
+            margin: 20px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 2px 16px rgba(26,75,140,0.08);
+        }
+
+        h2 {
+            font-family: 'Syne', sans-serif;
+            color: var(--biru);
+            font-size: 1.5rem;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h2::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(to right, var(--aksen), transparent);
+            border-radius: 2px;
+        }
+
+        h3 { color: var(--biru-tua); margin: 18px 0 10px; font-size: 1rem; font-weight: 600; }
+        p { line-height: 1.75; color: #555; margin-bottom: 10px; font-size: 0.93rem; }
+
+        /* ===== HOME ===== */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--biru) 0%, var(--biru-muda) 100%);
+            border-radius: 12px;
+            padding: 22px;
+            color: white;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::after {
+            content: '👨‍💻';
+            position: absolute;
+            right: 20px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        .welcome-banner h3 { color: var(--aksen2); margin: 0 0 6px; font-size: 1.1rem; }
+        .welcome-banner p { color: rgba(255,255,255,0.85); margin: 0; font-size: 0.88rem; }
+
+        /* COUNTER ANIMASI */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--abu);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            border-top: 3px solid var(--biru-muda);
+        }
+
+        .stat-angka {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            color: var(--biru);
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .stat-label { font-size: 0.72rem; color: #888; margin-top: 4px; }
+
+        /* MATERI dengan PROGRESS */
+        .materi-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--abu);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .materi-item:hover { transform: translateX(4px); background: #e6edf9; }
+
+        .materi-icon {
+            width: 38px; height: 38px;
+            border-radius: 8px;
+            background: var(--biru);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .materi-info { flex: 1; }
+        .materi-info .nama { font-weight: 600; font-size: 0.9rem; color: var(--teks); }
+
+        .progress-bar-wrap {
+            background: #dce6f5;
+            border-radius: 10px;
+            height: 6px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--biru-muda), var(--aksen));
+            transition: width 1s ease;
+        }
+
+        .materi-persen { font-size: 0.75rem; color: var(--biru-muda); font-weight: 600; }
+
+        /* QUIZ MINI */
+        .quiz-wrap {
+            background: linear-gradient(135deg, #fff8f5, #fff3ed);
+            border: 1.5px solid #ffd5c4;
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .quiz-wrap h3 { margin-top: 0; color: var(--aksen); }
+
+        .quiz-soal { font-weight: 500; font-size: 0.92rem; color: var(--teks); margin-bottom: 12px; }
+
+        .quiz-pilihan {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .quiz-btn {
+            background: white;
+            border: 1.5px solid #ffd5c4;
+            border-radius: 8px;
+            padding: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--teks);
+        }
+
+        .quiz-btn:hover { background: #fff3ed; border-color: var(--aksen); }
+        .quiz-btn.benar { background: #d4edda; border-color: #28a745; color: #155724; }
+        .quiz-btn.salah { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+
+        .quiz-feedback {
+            margin-top: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            min-height: 20px;
+            text-align: center;
+        }
+
+        /* ===== PROFIL ===== */
+        .profil-card {
+            background: linear-gradient(135deg, var(--biru-tua), var(--biru));
+            border-radius: 14px;
+            padding: 24px;
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profil-card::before {
+            content: '';
+            position: absolute;
+            top: -40px; right: -40px;
+            width: 150px; height: 150px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .avatar-z {
+            width: 88px; height: 88px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--aksen), var(--aksen2));
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Syne', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: white;
+            margin: 0 auto 12px;
+            box-shadow: 0 6px 20px rgba(255,107,53,0.4);
+            position: relative;
+        }
+
+        .avatar-z::after {
+            content: '🟢';
+            position: absolute;
+            bottom: 2px; right: 2px;
+            font-size: 0.7rem;
+        }
+
+        .profil-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.3rem;
+            margin: 0;
+            color: white;
+        }
+
+        .profil-card .sub { font-size: 0.82rem; opacity: 0.7; margin: 4px 0 10px; }
+
+        .badges-row {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .badge-item {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.72rem;
+        }
+
+        /* SKILL BARS */
+        .skill-list { display: flex; flex-direction: column; gap: 12px; }
+
+        .skill-row { }
+        .skill-top { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 5px; }
+        .skill-top .s-nama { font-weight: 600; color: var(--teks); }
+        .skill-top .s-persen { color: var(--biru-muda); font-weight: 600; }
+
+        .skill-bar {
+            background: #dce6f5;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(to right, var(--biru), var(--aksen));
+            width: 0;
+            transition: width 1.2s ease;
+        }
+
+        /* TIMELINE */
+        .timeline { position: relative; padding-left: 24px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px; top: 0; bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--biru-muda), transparent);
+        }
+
+        .tl-item {
+            position: relative;
+            margin-bottom: 16px;
+            padding: 12px 14px;
+            background: var(--abu);
+            border-radius: 10px;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -20px; top: 16px;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--biru-muda);
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--biru-muda);
+        }
+
+        .tl-tahun { font-size: 0.7rem; color: var(--aksen); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .tl-judul { font-weight: 600; font-size: 0.9rem; color: var(--teks); }
+        .tl-desc { font-size: 0.8rem; color: #777; margin: 0; }
+
+        /* ===== GALERI ===== */
+        .galeri-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .galeri-card {
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            background: var(--abu);
+            border: 2px dashed #c0d0e8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            gap: 6px;
+        }
+
+        .galeri-card:hover { border-color: var(--biru-muda); background: #e6edf9; }
+        .galeri-card .gal-icon { font-size: 2rem; }
+        .galeri-card .gal-label { font-size: 0.75rem; color: #999; font-weight: 500; }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,20,40,0.92);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .lightbox.buka { display: flex; }
+
+        .lightbox-konten {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 320px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .lightbox-konten .lb-icon { font-size: 3.5rem; margin-bottom: 12px; }
+        .lightbox-konten h3 { margin: 0 0 6px; color: var(--biru); font-family: 'Syne', sans-serif; }
+        .lightbox-konten p { color: #666; font-size: 0.85rem; margin: 0; }
+
+        .btn-tutup {
+            background: white;
+            color: var(--teks);
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* ===== KONTAK ===== */
+        .kontak-hero {
+            background: linear-gradient(135deg, #fff8f5, #fff3ed);
+            border: 1.5px solid #ffd5c4;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .kontak-hero .big-icon { font-size: 2.5rem; }
+        .kontak-hero h3 { color: var(--aksen); margin: 6px 0 2px; }
+        .kontak-hero p { font-size: 0.84rem; color: #888; margin: 0; }
+
+        .kontak-list { display: flex; flex-direction: column; gap: 10px; }
+
+        .k-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px;
+            background: var(--abu);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .k-item:hover { background: #e6edf9; transform: translateX(4px); }
+
+        .k-icon-wrap {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .k-detail .k-platform { font-size: 0.72rem; color: #999; text-transform: uppercase; letter-spacing: 1px; }
+        .k-detail .k-handle { font-weight: 600; font-size: 0.92rem; color: var(--teks); }
+
+        .k-arrow { margin-left: auto; color: #bbb; font-size: 1rem; }
+
+        /* FORM */
+        .form-wrap {
+            margin-top: 20px;
+            background: var(--abu);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .form-wrap h3 { margin-top: 0; }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1.5px solid #d0dff0;
+            border-radius: 8px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.9rem;
+            outline: none;
+            background: white;
+            transition: border-color 0.2s;
+            margin-bottom: 10px;
+            resize: vertical;
+        }
+
+        .input-field:focus { border-color: var(--biru-muda); }
+
+        .char-count { font-size: 0.75rem; color: #aaa; text-align: right; margin-top: -6px; margin-bottom: 10px; }
+
+        .btn-send {
+            width: 100%;
+            background: linear-gradient(135deg, var(--biru), var(--biru-muda));
+            color: white;
+            border: none;
+            padding: 13px;
+            border-radius: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-send:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(26,75,140,0.3); }
+
+        .notif-sukses {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #b2dfca;
+            color: #155724;
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 0.87rem;
+            text-align: center;
+        }
+
+        /* MODE GELAP TOGGLE */
+        .darkmode-toggle {
+            position: fixed;
+            bottom: 20px; right: 20px;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: var(--biru);
+            color: white;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(26,75,140,0.35);
+            z-index: 100;
+            transition: all 0.25s;
+        }
+
+        .darkmode-toggle:hover { transform: scale(1.1); }
+
+        /* DARK MODE */
+        body.dark {
+            --abu: #0f1b2d;
+            --card-bg: #162335;
+            --teks: #e8edf5;
+        }
+
+        body.dark header { background: linear-gradient(135deg, #050e1a, #0f2d5a, #1a4b8c); }
+        body.dark nav { background: #050e1a; }
+        body.dark .materi-item { background: #1e3050; }
+        body.dark .materi-item:hover { background: #253b60; }
+        body.dark .stat-card { background: #1e3050; }
+        body.dark .skill-bar { background: #1e3050; }
+        body.dark .tl-item { background: #1e3050; }
+        body.dark .quiz-wrap { background: #1e1010; border-color: #5a2a1a; }
+        body.dark .quiz-btn { background: #1e1010; border-color: #5a2a1a; color: #e8edf5; }
+        body.dark .kontak-hero { background: #1e1010; border-color: #5a2a1a; }
+        body.dark .k-item { background: #1e3050; }
+        body.dark .k-item:hover { background: #253b60; }
+        body.dark .form-wrap { background: #1e3050; }
+        body.dark .input-field { background: #162335; border-color: #2e4a6e; color: #e8edf5; }
+        body.dark .galeri-card { background: #1e3050; border-color: #2e4a6e; }
+        body.dark .galeri-card:hover { background: #253b60; }
+        body.dark p { color: #a0b0c8; }
+        body.dark .tl-desc { color: #8090a8; }
+        body.dark .k-detail .k-handle { color: #e8edf5; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--biru-tua);
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            padding: 14px;
+            font-size: 0.8rem;
+            margin-top: auto;
+        }
+
+        footer span { color: var(--aksen); }
+
+        /* ===== GALERI PAGE ===== */
+        .projek-card {
+            background: var(--abu);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--biru-muda);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .projek-card:hover { transform: translateX(4px); box-shadow: 0 4px 14px rgba(26,75,140,0.1); }
+
+        .proj-top { display: flex; justify-content: space-between; align-items: flex-start; }
+        .proj-nama { font-weight: 700; font-size: 0.95rem; color: var(--teks); }
+        .proj-tag {
+            background: var(--biru);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.68rem;
+            font-weight: 600;
+        }
+        .proj-desc { font-size: 0.82rem; color: #777; margin: 6px 0 0; line-height: 1.5; }
+
+        body.dark .projek-card { background: #1e3050; }
+        body.dark .proj-desc { color: #8090a8; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-chip">✦ Personal Website</div>
+    <h1>Zaidan <span>.</span></h1>
+    <p>Belajar HTML & CSS dari nol 🚀</p>
+</header>
+
+<nav>
+    <button class="aktif" onclick="ganti('home', this)">🏠 Home</button>
+    <button onclick="ganti('profil', this)">👤 Profil</button>
+    <button onclick="ganti('projek', this)">🗂️ Projek</button>
+    <button onclick="ganti('kontak', this)">📩 Kontak</button>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="page-home" class="page tampil">
+    <div class="container">
+        <h2>🏠 Beranda</h2>
+
+        <div class="welcome-banner">
+            <h3>👋 Halo, gua Zaidan!</h3>
+            <p>Website ini dibuat untuk belajar HTML dan CSS. Lagi dalam perjalanan jadi web developer keren!</p>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-card">
+                <div class="stat-angka" data-target="6">0</div>
+                <div class="stat-label">Materi</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-angka" data-target="3">0</div>
+                <div class="stat-label">Projek</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-angka" data-target="30">0</div>
+                <div class="stat-label">Hari Belajar</div>
+            </div>
+        </div>
+
+        <h3>📚 Progress Materi</h3>
+        <div class="materi-item">
+            <div class="materi-icon">🏗️</div>
+            <div class="materi-info">
+                <div class="nama">Struktur HTML</div>
+                <div class="progress-bar-wrap"><div class="progress-bar-fill" data-lebar="90"></div></div>
+            </div>
+            <div class="materi-persen">90%</div>
+        </div>
+        <div class="materi-item">
+            <div class="materi-icon">🎨</div>
+            <div class="materi-info">
+                <div class="nama">CSS Dasar</div>
+                <div class="progress-bar-wrap"><div class="progress-bar-fill" data-lebar="75"></div></div>
+            </div>
+            <div class="materi-persen">75%</div>
+        </div>
+        <div class="materi-item">
+            <div class="materi-icon">🔗</div>
+            <div class="materi-info">
+                <div class="nama">Flexbox & Grid</div>
+                <div class="progress-bar-wrap"><div class="progress-bar-fill" data-lebar="50"></div></div>
+            </div>
+            <div class="materi-persen">50%</div>
+        </div>
+        <div class="materi-item">
+            <div class="materi-icon">⚡</div>
+            <div class="materi-info">
+                <div class="nama">JavaScript Dasar</div>
+                <div class="progress-bar-wrap"><div class="progress-bar-fill" data-lebar="30"></div></div>
+            </div>
+            <div class="materi-persen">30%</div>
+        </div>
+
+        <!-- QUIZ MINI -->
+        <div class="quiz-wrap">
+            <h3>🧠 Quiz HTML Cepat</h3>
+            <div class="quiz-soal" id="quiz-soal">Loading soal...</div>
+            <div class="quiz-pilihan" id="quiz-pilihan"></div>
+            <div class="quiz-feedback" id="quiz-feedback"></div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== PROFIL ===== -->
+<div id="page-profil" class="page">
+    <div class="container">
+        <h2>👤 Profil</h2>
+
+        <div class="profil-card">
+            <div class="avatar-z">Z</div>
+            <h3>Zaidan</h3>
+            <p class="sub">Web Developer in Progress</p>
+            <div class="badges-row">
+                <span class="badge-item">🔥 Aktif Belajar</span>
+                <span class="badge-item">💡 Open to Learn</span>
+                <span class="badge-item">🎯 Ambitious</span>
+            </div>
+        </div>
+
+        <h3>💻 Skill Level</h3>
+        <div class="skill-list">
+            <div class="skill-row">
+                <div class="skill-top"><span class="s-nama">HTML</span><span class="s-persen">85%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-lebar="85"></div></div>
+            </div>
+            <div class="skill-row">
+                <div class="skill-top"><span class="s-nama">CSS</span><span class="s-persen">70%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-lebar="70"></div></div>
+            </div>
+            <div class="skill-row">
+                <div class="skill-top"><span class="s-nama">JavaScript</span><span class="s-persen">35%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-lebar="35"></div></div>
+            </div>
+            <div class="skill-row">
+                <div class="skill-top"><span class="s-nama">Figma / Design</span><span class="s-persen">50%</span></div>
+                <div class="skill-bar"><div class="skill-fill" data-lebar="50"></div></div>
+            </div>
+        </div>
+
+        <h3>🗓️ Perjalanan Belajar</h3>
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-tahun">JAN 2026</div>
+                <div class="tl-judul">Mulai Belajar HTML</div>
+                <p class="tl-desc">Pertama kali bikin halaman HTML sederhana, excited banget!</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-tahun">FEB 2026</div>
+                <div class="tl-judul">Masuk ke CSS</div>
+                <p class="tl-desc">Belajar styling, flexbox, dan bikin layout yang rapi.</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-tahun">MAR 2026</div>
+                <div class="tl-judul">Belajar JavaScript</div>
+                <p class="tl-desc">Mulai interaktifin web dengan JS, banyak error tapi seru!</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-tahun">APR 2026</div>
+                <div class="tl-judul">Bikin Website Ini 🎉</div>
+                <p class="tl-desc">Website personal pertama yang kelihatan proper!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== PROJEK ===== -->
+<div id="page-projek" class="page">
+    <div class="container">
+        <h2>🗂️ Projek</h2>
+        <p>Kumpulan projek yang udah gua bikin selama belajar coding.</p>
+
+        <div class="projek-card" onclick="bukaLightbox('proj1')">
+            <div class="proj-top">
+                <div class="proj-nama">🌐 Website Portofolio</div>
+                <span class="proj-tag">HTML/CSS</span>
+            </div>
+            <p class="proj-desc">Website personal pertama menggunakan HTML & CSS murni. Includes halaman home, about, dan kontak.</p>
+        </div>
+
+        <div class="projek-card" onclick="bukaLightbox('proj2')">
+            <div class="proj-top">
+                <div class="proj-nama">🧮 Kalkulator Sederhana</div>
+                <span class="proj-tag">JavaScript</span>
+            </div>
+            <p class="proj-desc">Kalkulator interaktif yang bisa hitung penjumlahan, pengurangan, perkalian, dan pembagian.</p>
+        </div>
+
+        <div class="projek-card" onclick="bukaLightbox('proj3')">
+            <div class="proj-top">
+                <div class="proj-nama">📋 To-Do List App</div>
+                <span class="proj-tag">JS + CSS</span>
+            </div>
+            <p class="proj-desc">Aplikasi daftar tugas dengan fitur tambah, hapus, dan centang selesai.</p>
+        </div>
+
+        <h3>📷 Galeri Karya</h3>
+        <div class="galeri-grid">
+            <div class="galeri-card" onclick="bukaLightbox('gal1')">
+                <div class="gal-icon">🌐</div>
+                <div class="gal-label">Website Pertama</div>
+            </div>
+            <div class="galeri-card" onclick="bukaLightbox('gal2')">
+                <div class="gal-icon">🎨</div>
+                <div class="gal-label">Layout CSS Grid</div>
+            </div>
+            <div class="galeri-card" onclick="bukaLightbox('gal3')">
+                <div class="gal-icon">🧮</div>
+                <div class="gal-label">Kalkulator App</div>
+            </div>
+            <div class="galeri-card" onclick="bukaLightbox('gal4')">
+                <div class="gal-icon">📋</div>
+                <div class="gal-label">To-Do List</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== KONTAK ===== -->
+<div id="page-kontak" class="page">
+    <div class="container">
+        <h2>📩 Kontak</h2>
+
+        <div class="kontak-hero">
+            <div class="big-icon">👋</div>
+            <h3>Yuk Ngobrol!</h3>
+            <p>Mau kolaborasi, nanya, atau sekadar say hi? Gua terbuka!</p>
+        </div>
+
+        <h3>📲 Temukan Gua di</h3>
+        <div class="kontak-list">
+            <div class="k-item">
+                <div class="k-icon-wrap" style="background:#e8f0fb;">📘</div>
+                <div class="k-detail">
+                    <div class="k-platform">Facebook</div>
+                    <div class="k-handle">@zaidan.dev</div>
+                </div>
+                <div class="k-arrow">›</div>
+            </div>
+            <div class="k-item">
+                <div class="k-icon-wrap" style="background:#fef0e8;">📸</div>
+                <div class="k-detail">
+                    <div class="k-platform">Instagram</div>
+                    <div class="k-handle">@zaidan.dev</div>
+                </div>
+                <div class="k-arrow">›</div>
+            </div>
+            <div class="k-item">
+                <div class="k-icon-wrap" style="background:#e8f5f0;">💬</div>
+                <div class="k-detail">
+                    <div class="k-platform">WhatsApp</div>
+                    <div class="k-handle">+62 xxx-xxxx-xxxx</div>
+                </div>
+                <div class="k-arrow">›</div>
+            </div>
+            <div class="k-item">
+                <div class="k-icon-wrap" style="background:#f0e8f8;">💻</div>
+                <div class="k-detail">
+                    <div class="k-platform">GitHub</div>
+                    <div class="k-handle">github.com/zaidan</div>
+                </div>
+                <div class="k-arrow">›</div>
+            </div>
+        </div>
+
+        <div class="form-wrap">
+            <h3>✉️ Kirim Pesan Langsung</h3>
+            <input type="text" class="input-field" id="inp-nama" placeholder="Nama kamu">
+            <input type="text" class="input-field" id="inp-subjek" placeholder="Subjek pesan">
+            <textarea class="input-field" id="inp-pesan" rows="4" placeholder="Tulis pesanmu..." oninput="updateChar()"></textarea>
+            <div class="char-count"><span id="char-count">0</span>/200 karakter</div>
+            <button class="btn-send" onclick="kirim()">Kirim Sekarang ✈️</button>
+            <div class="notif-sukses" id="notif">🎉 Pesan terkirim! Zaidan bakal bales secepatnya.</div>
+        </div>
+    </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="tutupLightbox()">
+    <div class="lightbox-konten" onclick="event.stopPropagation()">
+        <div class="lb-icon" id="lb-icon">🌐</div>
+        <h3 id="lb-judul">Judul</h3>
+        <p id="lb-desc">Deskripsi projek</p>
+    </div>
+    <button class="btn-tutup" onclick="tutupLightbox()">✕ Tutup</button>
+</div>
+
+<!-- DARK MODE BUTTON -->
+<button class="darkmode-toggle" onclick="toggleDark()" title="Toggle Mode Gelap">🌙</button>
+
+<footer>
+    <p>© 2026 — <span>Zaidan</span> · Dibuat dengan ❤️ & banyak ☕</p>
+</footer>
+
+<script>
+    // ===== NAVIGASI =====
+    function ganti(halaman, btn) {
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('tampil'));
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('aktif'));
+        document.getElementById('page-' + halaman).classList.add('tampil');
+        btn.classList.add('aktif');
+
+        if (halaman === 'profil') animateSkills();
+        if (halaman === 'home') {
+            animateProgress();
+            animateCounters();
+        }
+    }
+
+    // ===== COUNTER ANIMASI =====
+    function animateCounters() {
+        document.querySelectorAll('.stat-angka').forEach(el => {
+            const target = parseInt(el.dataset.target);
+            let current = 0;
+            const step = Math.ceil(target / 30);
+            const timer = setInterval(() => {
+                current = Math.min(current + step, target);
+                el.textContent = current;
+                if (current >= target) clearInterval(timer);
+            }, 40);
+        });
+    }
+
+    // ===== PROGRESS BAR =====
+    function animateProgress() {
+        document.querySelectorAll('.progress-bar-fill').forEach(el => {
+            el.style.width = el.dataset.lebar + '%';
+        });
+    }
+
+    // ===== SKILL BAR =====
+    function animateSkills() {
+        setTimeout(() => {
+            document.querySelectorAll('.skill-fill').forEach(el => {
+                el.style.width = el.dataset.lebar + '%';
+            });
+        }, 100);
+    }
+
+    // ===== QUIZ =====
+    const soalList = [
+        {
+            soal: "Tag apa yang digunakan untuk heading terbesar?",
+            pilihan: ["<h1>", "<h6>", "<header>", "<big>"],
+            jawaban: 0
+        },
+        {
+            soal: "Tag apa yang membuat teks menjadi tebal (bold)?",
+            pilihan: ["<i>", "<u>", "<b>", "<em>"],
+            jawaban: 2
+        },
+        {
+            soal: "Atribut apa yang digunakan di tag <img> untuk menampilkan gambar?",
+            pilihan: ["href", "src", "link", "url"],
+            jawaban: 1
+        },
+        {
+            soal: "Tag apa yang digunakan untuk membuat hyperlink?",
+            pilihan: ["<link>", "<href>", "<a>", "<url>"],
+            jawaban: 2
+        },
+        {
+            soal: "Apa kepanjangan dari CSS?",
+            pilihan: ["Computer Style Sheet", "Creative Style Syntax", "Cascading Style Sheets", "Colorful Style System"],
+            jawaban: 2
+        }
+    ];
+
+    let soalIndex = 0;
+    let quizDone = false;
+
+    function loadSoal() {
+        const s = soalList[soalIndex];
+        document.getElementById('quiz-soal').textContent = `Soal ${soalIndex+1}/${soalList.length}: ${s.soal}`;
+        document.getElementById('quiz-feedback').textContent = '';
+        const wrap = document.getElementById('quiz-pilihan');
+        wrap.innerHTML = '';
+        s.pilihan.forEach((p, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'quiz-btn';
+            btn.textContent = p;
+            btn.onclick = () => jawabSoal(i, s.jawaban);
+            wrap.appendChild(btn);
+        });
+    }
+
+    function jawabSoal(idx, benar) {
+        if (quizDone) return;
+        quizDone = true;
+        const btns = document.querySelectorAll('.quiz-btn');
+        btns[idx].classList.add(idx === benar ? 'benar' : 'salah');
+        if (idx !== benar) btns[benar].classList.add('benar');
+
+        const feedback = document.getElementById('quiz-feedback');
+        feedback.textContent = idx === benar ? '✅ Bener! Lanjut soal berikutnya...' : '❌ Salah. Jawaban bener udah dilingkarin hijau!';
+
+        setTimeout(() => {
+            quizDone = false;
+            soalIndex = (soalIndex + 1) % soalList.length;
+            loadSoal();
+        }, 1800);
+    }
+
+    // ===== LIGHTBOX =====
+    const projekData = {
+        proj1: { icon: '🌐', judul: 'Website Portofolio', desc: 'Website personal pertama menggunakan HTML & CSS murni. Ini adalah proyek kebanggaan!' },
+        proj2: { icon: '🧮', judul: 'Kalkulator Sederhana', desc: 'Kalkulator interaktif dengan operasi dasar matematika menggunakan JavaScript.' },
+        proj3: { icon: '📋', judul: 'To-Do List App', desc: 'Aplikasi daftar tugas dengan localStorage agar data tersimpan.' },
+        gal1: { icon: '🌐', judul: 'Website Pertama', desc: 'Screenshot dari website HTML pertama yang berhasil dibuat!' },
+        gal2: { icon: '🎨', judul: 'Layout CSS Grid', desc: 'Eksperimen dengan CSS Grid untuk membuat layout kompleks.' },
+        gal3: { icon: '🧮', judul: 'Kalkulator App', desc: 'Tampilan aplikasi kalkulator yang sudah selesai dibuat.' },
+        gal4: { icon: '📋', judul: 'To-Do List', desc: 'Preview aplikasi to-do list yang fungsional dan rapi.' },
+    };
+
+    function bukaLightbox(id) {
+        const data = projekData[id];
+        document.getElementById('lb-icon').textContent = data.icon;
+        document.getElementById('lb-judul').textContent = data.judul;
+        document.getElementById('lb-desc').textContent = data.desc;
+        document.getElementById('lightbox').classList.add('buka');
+    }
+
+    function tutupLightbox() {
+        document.getElementById('lightbox').classList.remove('buka');
+    }
+
+    // ===== FORM =====
+    function updateChar() {
+        const val = document.getElementById('inp-pesan').value;
+        document.getElementById('char-count').textContent = val.length;
+    }
+
+    function kirim() {
+        const nama = document.getElementById('inp-nama').value.trim();
+        const subjek = document.getElementById('inp-subjek').value.trim();
+        const pesan = document.getElementById('inp-pesan').value.trim();
+
+        if (!nama || !subjek || !pesan) {
+            alert('⚠️ Isi semua kolom dulu ya!');
+            return;
+        }
+
+        document.getElementById('notif').style.display = 'block';
+        document.getElementById('inp-nama').value = '';
+        document.getElementById('inp-subjek').value = '';
+        document.getElementById('inp-pesan').value = '';
+        document.getElementById('char-count').textContent = '0';
+
+        setTimeout(() => {
+            document.getElementById('notif').style.display = 'none';
+        }, 4000);
+    }
+
+    // ===== DARK MODE =====
+    function toggleDark() {
+        document.body.classList.toggle('dark');
+        const btn = document.querySelector('.darkmode-toggle');
+        btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    }
+
+    // ===== INIT =====
+    loadSoal();
+    animateProgress();
+    animateCounters();
+</script>
+</body>
+</html>
