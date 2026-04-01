@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <!-- ============================= -->
+    <!-- BAGIAN HEAD (Pengaturan Awal) -->
+    <!-- ============================= -->
+    
+    <meta charset="UTF-8"> <!-- Mengatur karakter agar mendukung bahasa Indonesia -->
+    <title>Website Sederhana</title> <!-- Judul yang tampil di tab browser -->
+
+    <style>
+        /* ============================= */
+        /* BAGIAN CSS (Desain Tampilan)  */
+        /* ============================= */
+
+        /* Mengatur tampilan keseluruhan halaman */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header / Tampilan Atas Website */
+        header {
+            background-color: #4f2c50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        /* Menu Navigasi */
+        nav {
+            background-color: #5b345e;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Link di dalam menu */
+        nav a {
+            color: white;
+            margin: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer; /* Agar terlihat bisa diklik */
+        }
+
+        /* Efek saat mouse diarahkan */
+        nav a:hover {
+            color: yellow;
+        }
+
+        /* Container isi halaman */
+        .container {
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+        }
+
+        /* Semua halaman disembunyikan dulu */
+        .page {
+            display: none;
+        }
+
+        /* Halaman yang aktif akan ditampilkan */
+        .active {
+            display: block;
+        }
+
+        /* Footer / Bagian bawah website */
+        footer {
+            background-color: #482c50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ============================= -->
+<!-- HEADER (Tampilan Awal Atas)  -->
+<!-- ============================= -->
+<header>
+    <h1>Website Sederhana</h1>
+    <p>Belajar HTML, CSS, dan JavaScript Dasar</p>
+</header>
+
+<!-- ============================= -->
+<!-- MENU NAVIGASI                -->
+<!-- ============================= -->
+<nav>
+    <!-- onclick digunakan untuk memanggil fungsi JavaScript -->
+    <a onclick="showPage('home')">Home</a>
+    <a onclick="showPage('profil')">Profil</a>
+    <a onclick="showPage('kontak')">Kontak</a>
+</nav>
+
+<div class="container">
+
+    <!-- ============================= -->
+    <!-- HALAMAN AWAL / HOME          -->
+    <!-- ============================= -->
+    <div id="home" class="page active">
+        <h2>Selamat Datang</h2>
+        <p>
+            Ini adalah tampilan awal (Home). 
+            Website ini sudah bisa berpindah halaman menggunakan JavaScript.
+        </p>
+
+        
+    </div>
+
+    <!-- ============================= -->
+    <!-- HALAMAN PROFIL               -->
+    <!-- ============================= -->
+    <div id="profil" class="page">
+        <h2>Profil Saya</h2>
+        <p>Nama: Febi Nurshitawati</p>
+        <p>NIM: 240631100036</p>
+        <p>Status: Mahasiswa</p>
+        <p>Program Studi: Pendidikan Informatika</p>
+    </div>
+
+    <!-- ============================= -->
+<!-- HALAMAN KONTAK               -->
+<!-- ============================= -->
+<div id="kontak" class="page">
+    <h2>Halaman Kontak</h2>
+
+    <!-- EMAIL LANGSUNG KLIK -->
+    <p>Email: 
+        <a href="mailto:febyana006@gmail.com">
+            febyana006@gmail.com
+        </a>
+    </p>
+
+    <!-- WHATSAPP LANGSUNG CHAT -->
+    <p>WhatsApp: 
+        <a href="https://wa.me/6282231133972" target="_blank">
+           082231133972
+        </a>
+    </p>
+</div>
+
+</div>
+
+<!-- ============================= -->
+<!-- FOOTER (Bagian Bawah)        -->
+<!-- ============================= -->
+<footer>
+    <p>© 2026 - Belajar Pemrograman Web</p>
+</footer>
+
+<!-- ============================= -->
+<!-- JAVASCRIPT (FUNGSI WEBSITE)  -->
+<!-- ============================= -->
+<script>
+
+    // Fungsi untuk menampilkan halaman sesuai menu yang diklik
+    function showPage(pageId) {
+
+        // Ambil semua elemen dengan class "page"
+        let pages = document.querySelectorAll(".page");
+
+        // Sembunyikan semua halaman
+        pages.forEach(function(page) {
+            page.classList.remove("active");
+        });
+
+        // Tampilkan halaman yang dipilih
+        document.getElementById(pageId).classList.add("active");
+    }
+
+    // Fungsi saat tombol kirim ditekan
+    function kirimPesan(event) {
+
+        // Mencegah halaman reload
+        event.preventDefault();
+
+        // Mengambil nilai dari input
+        let nama = document.getElementById("nama").value;
+        let email = document.getElementById("email").value;
+        let pesan = document.getElementById("pesan").value;
+
+        // Menampilkan pesan konfirmasi
+        document.getElementById("output").innerHTML =
+            "Terima kasih <b>" + nama + "</b>, pesan Anda sudah dikirim!";
+    }
+
+</script>
+
+</body>
+</html>
