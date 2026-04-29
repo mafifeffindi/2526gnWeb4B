@@ -1,0 +1,10 @@
+<?php
+echo "<h2>Profil Programmer</h2>";
+echo "<hr>";
+
+echo "Nama: Laily <br>";
+echo "Universitas: Universitas Trunojoyo Madura <br>";
+echo "Hobi: Membaca novel <br>";
+echo "Cita-cita: Guru PNS <br>";
+echo "Alasan belajar: Biar pintar.";
+?>
