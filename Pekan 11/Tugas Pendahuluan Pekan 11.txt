@@ -1,0 +1,7 @@
+Buat aplikasi:
+“Student Registration Mini App”
+Fitur utama:
+1. Input data mahasiswa melalui form
+2. Proses data menggunakan PHP (fungsi, string, array)
+3. Simpan ke database
+4. Tampilkan data mahasiswa
