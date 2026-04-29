@@ -1,0 +1,13 @@
+<?php
+
+echo "Nama : Safinatus Soleha<br>";
+
+echo "Universitas : UTM <br>";
+
+echo "Hobi : Membaca <br>";
+
+echo "Cita-cita : Teacher <br>";
+
+echo "Alasan Belajar Web Programming : Ingin membuat website sendiri <br>";
+
+?>
