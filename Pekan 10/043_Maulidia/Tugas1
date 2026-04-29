@@ -1,0 +1,19 @@
+<DOCTYPE HTML>
+    <html>
+        <head>
+            <title>Eksperimen PHP</title>
+            </head>
+             <body>
+                <h1>Data Diri Mahasiswa</h1>
+                <hr>
+                <?php
+                echo "Nama : Maulidia<br>";
+                echo "Universitas : Universitas Trunojoyo Madura<br>";
+                echo "Hobi : Membaca dan Menulis<br>";
+                echo "Cita-Cita : Guru<br>";
+                echo "Alasan Belajar Pemrograman Web : Ingin Membuat Website Sendiri<br>";
+                ?> 
+            </body>
+            </html>
+
+         
