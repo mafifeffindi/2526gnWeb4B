@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Halaman PHP</title>
+</head>
+<body>
+
+<h1>Belajar PHP</h1>
+
+<p>Saya sedang belajar pemrograman web menggunakan PHP.</p>
+
+<?php
+echo "Nama : Mariska Safitri <br>";
+echo "Saya belajar PHP agar bisa membuat website <br>";
+echo "PHP berjalan di server dan menghasilkan HTML";
+?>
+
+</body>
+</html>
