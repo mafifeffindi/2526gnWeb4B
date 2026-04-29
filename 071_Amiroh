@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Eksperimen PHP</title>
+</head>
+<body>
+    <h1>Profil Mahasiswa</h1>
+    <hr>
+    <?php
+echo"Nama : Amiroh<br>";
+echo"NIM : 240631100071<br>";
+echo"Universitas : Universitas Trunodjoyo Madura<br>";
+echo"Hobi : Berenang<br>";
+echo"Cira-cita : Menjadi pengusaha<br>";
+echo"Alasan belajar web programming : Ingin membuat dan mengembangkanbisnis berbasis website serta membuka peluang usaha digital<br>";
+?>
+</body>
+</html>
