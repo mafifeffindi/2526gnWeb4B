@@ -1,0 +1,19 @@
+PENJELASAN PROJECT - STUDENT REGISTRATION MINI APP
+Nama: Alif Maulana
+NIM/Absen: 059
+
+1. PERBEDAAN GET DAN POST
+- POST (index.php): Digunakan untuk mengirim data pendaftaran karena lebih aman, 
+  data tidak muncul di URL, dan cocok untuk input data ke database.
+- GET (tampil.php): Digunakan untuk fitur filter jurusan. Parameter filter 
+  dimunculkan di URL sehingga memudahkan user untuk membagikan hasil filter tertentu.
+
+2. FUNGSI PHP YANG DIBUAT (functions.php)
+- formatNama($nama): Menggunakan trim() untuk hapus spasi dan strtoupper() 
+  agar nama tersimpan dengan huruf kapital semua (seragam).
+- validasiEmail($email): Menggunakan filter_var(FILTER_VALIDATE_EMAIL) 
+  untuk memastikan user menginput format email yang benar.
+
+3. TEKNIS PENGEMBANGAN
+- Menggunakan database MySQL (kampus_db) dengan tabel mahasiswa.
+- Tampilan menggunakan Bootstrap 5 (Bonus) untuk desain yang lebih responsif.
