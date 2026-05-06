@@ -1,0 +1,141 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* BACKGROUND */
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #3b82f6, #0f172a);
+}
+
+/* CARD / CONTAINER */
+.card, .container {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* KHUSUS INDEX (BIAR CENTER) */
+body.center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* TITLE */
+h2 {
+    text-align: center;
+    color: #0f172a;
+    margin-bottom: 20px;
+}
+
+/* LABEL */
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #334155;
+}
+
+/* INPUT & SELECT */
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    margin-bottom: 15px;
+    outline: none;
+    transition: 0.2s;
+}
+
+input:focus, select:focus {
+    border-color: #3b82f6;
+}
+
+/* 🔘 BUTTON TIMBUL */
+button {
+    width: 100%;
+    padding: 10px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    box-shadow: 0 5px 0 #1e40af, 0 8px 15px rgba(0,0,0,0.2);
+}
+
+button:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 0 #1e40af, 0 12px 20px rgba(0,0,0,0.25);
+}
+
+button:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #1e40af;
+}
+
+/* 🔗 LINK JADI BUTTON */
+a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background: #0f172a;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+
+    box-shadow: 0 4px 0 #020617, 0 6px 12px rgba(0,0,0,0.2);
+}
+
+a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #020617, 0 10px 15px rgba(0,0,0,0.3);
+}
+
+a:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #020617;
+}
+
+/* FILTER & TOP */
+.top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.filter a {
+    margin-right: 5px;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #0f172a;
+    color: white;
+    padding: 12px;
+    font-size: 14px;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+tr:hover {
+    background: #f8fafc;
+}
