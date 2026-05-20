@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f2f5;
+    padding: 30px;
+    color: #333;
+}
+
+h2 {
+    color: #3498db;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.container {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    max-width: 900px;
+    margin: auto;
+}
+
+a.btn-tambah {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+a.btn-tambah:hover { background: #2176ae; }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+}
+
+th {
+    background: #3498db;
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+}
+
+td {
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover td { background: #f7f9fc; }
+
+a.btn-edit {
+    background: #f39c12;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+a.btn-hapus {
+    background: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+a.btn-edit:hover { background: #d68910; }
+a.btn-hapus:hover { background: #c0392b; }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s;
+}
+
+.form-group input:focus {
+    border-color: #3498db;
+}
+
+button[type=submit] {
+    background: #3498db;
+    color: white;
+    padding: 9px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button[type=submit]:hover { background: #2176ae; }
+
+a.btn-back {
+    display: inline-block;
+    color: #3498db;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+a.btn-back:hover { text-decoration: underline; }
+
+.empty-msg {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-size: 14px;
+}
