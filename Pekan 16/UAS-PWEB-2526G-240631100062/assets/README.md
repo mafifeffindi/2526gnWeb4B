@@ -51,7 +51,7 @@ Aplikasi To-Do List merupakan aplikasi berbasis web yang digunakan untuk mencata
 7. Akses alamat:
 
 ```
-http://localhost/UAS-PWEB-2526G-NIM/
+http://localhost/UAS-PWEB-2526G-240631100062/
 ```
 
 ## Teknologi yang Digunakan
