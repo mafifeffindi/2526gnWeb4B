@@ -1,10 +1,10 @@
 # Aplikasi To-Do List Sederhana
 
 ## Nama
-Nama Kamu
+Rahman Dwi Irfiyant0
 
 ## NIM
-NIM Kamu
+240631100062
 
 ## Judul Aplikasi
 Aplikasi To-Do List Sederhana Berbasis Web
