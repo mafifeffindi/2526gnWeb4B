@@ -1,0 +1,8 @@
+INSERT INTO barang
+(kode_barang, nama_barang, kategori, jumlah, kondisi, lokasi)
+VALUES
+('BR001','Laptop ASUS','Elektronik',5,'Baik','Lab Komputer'),
+('BR002','Proyektor Epson','Elektronik',2,'Baik','Ruang Seminar'),
+('BR003','Meja Kayu','Furniture',10,'Baik','Gudang'),
+('BR004','Kursi Plastik','Furniture',20,'Baik','Gudang'),
+('BR005','Printer Canon','Elektronik',3,'Rusak','Ruang TU');
