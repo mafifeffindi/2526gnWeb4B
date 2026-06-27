@@ -131,7 +131,7 @@ UAS-PWEB-2526G-240631100050/
 
 ## 🤖 Pernyataan Penggunaan GenAI
 
-Proyek ini dikembangkan dengan bantuan **Claude AI (Anthropic)** untuk membantu penulisan kode PHP, CSS, dan struktur aplikasi. Seluruh logika, alur, dan pemahaman konsep tetap dipelajari dan dipahami oleh mahasiswa yang bersangkutan.
+Proyek ini dikembangkan dengan bantuan ChatGPT sebagai alat bantu dalam penyusunan kode, perbaikan error, dan dokumentasi. Seluruh implementasi, pengujian, dan penyesuaian yang dilakukan.
 
 ---
 
