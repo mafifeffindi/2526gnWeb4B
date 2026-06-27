@@ -1,0 +1,15 @@
+body{
+    background:#f5f5f5;
+}
+
+h1{
+    font-weight:bold;
+}
+
+.lead{
+    color:#555;
+}
+
+.btn{
+    margin:5px;
+}
