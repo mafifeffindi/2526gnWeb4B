@@ -37,7 +37,7 @@ uas-mahasiswa
 └── README.md
 ```
 
-## Cara Menjalankan
+##Cara Menjalankan
 
 1. Jalankan Apache dan MySQL pada XAMPP.
 2. Import file `database.sql` ke phpMyAdmin.
